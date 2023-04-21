@@ -1,0 +1,94 @@
+.hiring-contact {
+    height: 200px;
+    background-color: #545454;
+    background-image: url(https://tuyendung.thecoffeehouse.com/dist/ClientApp/assets/svg/_Pattern.svg);
+    padding: 32px o;
+}
+.contact-box {
+    text-align: center;
+    padding: 40px 0;
+}
+.contact-box h4 {
+    font-size: 20px;
+    color: #fff;
+    font-family: inter;
+}
+.contact-method {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+.contact-email {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 280px;
+    height: 50px;
+    margin-right: 20px;
+    padding-top: 12px;
+}
+.contact-phonenumber {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    padding-top: 12px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 280px;
+    height: 50px;
+}
+.contact-email:hover *, .contact-phonenumber:hover *{
+    color: #ffb438;
+}
+.hiring-img {
+    width: 400px;
+    height: 265px;
+}
+.grid-container {
+    padding: 20px 355px;
+}
+.hiring-img img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.hiring-info {
+    background-color: rgb(237, 113, 59);
+    height: 250px;
+    width: 400px;
+}
+.hiring-info h3 {
+    font-size: 22px;
+    color: #fff;
+    padding-left: 10px;
+}
+.hiring-info ul{
+    margin-left: 20px;
+    /* padding-top: 15px; */
+}
+.hiring-info ul>li {
+    padding-top: 15px;
+    color: #fff;
+    font-size: 16px;
+}
+.job-show-all {
+    background-color: #fff;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    padding-top: 12px;
+    color: #000;
+    border-radius: 4px;
+    margin-left: 310px;
+    cursor: pointer;
+    font-size: 18px;
+    border: 1px solid gray;
+}
+.job-show-all:hover {
+    background-color: gray;
+    color: #fff;
+}

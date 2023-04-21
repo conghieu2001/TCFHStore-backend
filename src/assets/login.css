@@ -1,0 +1,58 @@
+.wrapper {	
+	/* margin-top: 80px;
+    margin-bottom: 80px; */
+    padding-top: 100px;
+    padding-bottom: 100px;
+    /* background: #f0eeee; */
+    background-image: url('https://cdn.tgdd.vn/mwgcart/orderhistory/images/bg.png');
+    min-height: 550px;
+}
+
+.form-signin {
+  max-width: 450px;
+  /* padding: 15px 35px 45px; */
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,0.1);  
+  box-shadow:  8px 8px 0px #a9a8a8,
+             -8px -8px 0px #ffc107;
+  /* background: rgb(251, 249, 249) !important; */
+  background-color: #ffffff;
+  /* border-top-right-radius: 8px; */
+}
+.form-signin-heading{
+	  margin-bottom: 30px;
+}
+.form-signin p {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Tahoma;
+    padding-top: 15px;
+}
+.button-submit {
+    background-color: #fd7e14;
+    width: 80%;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    color: #ffffff; 
+    margin-left: 45px;
+    margin-bottom: 15px;
+}
+.button-submit:hover {
+    background-color: rgb(66, 234, 122);
+}
+.login-banner {
+    width: 100%;
+    /* border-top-right-radius: 8px; */
+}
+.login-logo {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.form-signin input {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}

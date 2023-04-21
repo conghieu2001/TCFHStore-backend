@@ -1,0 +1,78 @@
+a {
+    text-decoration: none;
+    color: #000;
+}
+header {
+    border-bottom: 1px solid #00000026;
+    position: sticky;
+    background: rgba(255, 255, 255, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 60px;
+    width: 100%;
+}
+.header {
+    padding-left: 100px;
+    height: 100%;
+}
+.header__logo {
+    height: 30px;
+    margin-top: 20px;
+}
+.header__logo img{
+    width: 80%;
+    height: 60%;
+}
+.header__menu ul {
+    display: flex;
+    list-style: none;
+}
+.header__menu ul>li {
+    padding: 19px 10px 19px;
+}
+.header__menu ul>li>a:hover {
+    color: #E57905;
+}
+.header__icon div{
+    padding-right: 15px;
+}
+.header__icon input {
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.header__icon--search {
+    position: relative;
+}
+.header__icon button {
+    background-color: rgb(189, 189, 189);
+    border: none;
+    position: absolute;
+    right: 16px;
+    margin-top: 1px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.header__icon--cart {
+    position: relative;
+}
+.header__icon span {
+    position: absolute;
+    top: -7px;
+    right: 2px;
+    background: red;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    text-align: center;
+    min-width: 16px;
+    line-height: 16px;
+    color: #fff;
+}
+/* 05/02 */
+.header__icon--cart a:hover {
+    color: #000;
+}
+.header__icon--user a:hover  {
+    color: #000;
+}
