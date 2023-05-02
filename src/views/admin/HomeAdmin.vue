@@ -7,14 +7,14 @@
             <div class="pr-2">
               <i class="far fa-grin-hearts"></i>
             </div>
-            <div v-for="admin in admins" :key="admin._id">
-              <h6>{{ admin.name }}</h6>
+            <div >
+              <h6>{{ this.UserName }}</h6>
             </div>
           </div>
           <hr />
           <ul>
             <li>
-              <router-link to="/">
+              <router-link to="/admin">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
               </router-link>
@@ -26,10 +26,10 @@
               </router-link>
             </li>
             <li>
-              <a>
+              <router-link to="/orders">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>Đơn Hàng</span>
-              </a>
+              </router-link>
             </li>
             <li>
               <router-link to="/posts">
@@ -49,6 +49,12 @@
                 <span>Cửa Hàng</span>
               </router-link>
             </li>
+            <li>
+              <router-link to="/comments">
+                <i class="fa-solid fa-comment"></i>
+                <span>Bình Luận</span>
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="col-8 right-content pt-4">
@@ -61,25 +67,25 @@
               <router-link to="/items" class="showItem">
                 <div>
                   <span>SẢN PHẨM</span>
-                  <P>... sản phẩm</P>
+                  <P>{{ this.arrayItemCount.length }} sản phẩm</P>
                 </div>
               </router-link>
               <router-link to="/posts" class="showPosts">
                 <div>
                   <span>BÀI VIẾT</span>
-                  <P>... bài viết</P>
+                  <P>{{ this.arrayPostCount.length }} bài viết</P>
                 </div>
               </router-link>
-              <router-link to="" class="showOrders">
+              <router-link to="/orders" class="showOrders">
                 <div>
                   <span>ĐƠN HÀNG</span>
-                  <P>... đơn hàng</P>
+                  <P>{{ arrayPayCount.length }} đơn hàng</P>
                 </div>
               </router-link>
               <router-link to="" class="showSales">
                 <div>
                   <span>TỔNG DOANH THU</span>
-                  <P>...</P>
+                  <P>{{ doanhthu }}đ</P>
                 </div>
               </router-link>
             </div>
@@ -94,25 +100,50 @@
   </main>
 </template>
 <script>
-import AdminService from "@/services/admin.service";
+import ItemService from '../../services/item.service';
+import PostsService from '../../services/post.service';
+import PayService from '../../services/pay.service';
 export default {
   data() {
     return {
-      admins: [],
+      UserName: '',
+      arrayItemCount: [],
+      arrayPostCount: [],
+      arrayPayCount: [],
+      doanhthu: '',
     };
   },
   methods: {
-    async getDataAdmin() {
-      try {
-        this.admins = await AdminService.getAll();
-      } catch (error) {
-        console.log(error);
+    getUserName() {
+      const user = JSON.parse(localStorage.getItem('users'))
+      if (localStorage.getItem('users') != null) {
+        this.UserName = user.name;
       }
     },
+    async itemCount() {
+      this.arrayItemCount = await ItemService.getAll();
+    },
+    async postCount() {
+      this.arrayPostCount = await PostsService.getAll();
+    },
+    async payCount() {
+      this.arrayPayCount = await PayService.getAll();
+    },
+    async getDoanhThu() {
+      try {
+        this.doanhthu = await PayService.getDoanhThu();
+      } catch(error) {
+        console.log(error);
+      }
+    }
   },
-  created() {
-    this.getDataAdmin();
-  },
+  mounted() {
+    this.getUserName();
+    this.itemCount();
+    this.postCount();
+    this.payCount();
+    this.getDoanhThu();
+  }
 };
 </script>
 <style>
@@ -153,6 +184,7 @@ li > a > span {
 .fa-money-bill-wave,
 .fa-folder-open,
 .fa-user-plus,
+.fa-comment,
 .fa-map {
   color: #6e768e;
 }

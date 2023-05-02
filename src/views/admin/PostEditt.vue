@@ -8,7 +8,7 @@
       </router-link>
     </div>
     <div v-if="post" class="page container">
-    <h4>Hiệu chỉnh Sản phẩm</h4>
+    <h4>Hiệu chỉnh Bài viết</h4>
     <PostForm class="pt-3 pb-3" :post="post" @submit:post="updatePost" />
     <!-- <p>{{ message }}</p> -->
   </div>
@@ -34,6 +34,7 @@ export default {
     async getPost(id) {
       try {
         this.post = await PostService.get(id);
+        // console.log(this.post)
       } catch (error) {
         console.log(error);
         this.$router.push({

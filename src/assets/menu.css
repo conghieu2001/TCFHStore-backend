@@ -36,6 +36,7 @@ main {
 .menu-type-img img {
     width: 60%;
     height: 60%;
+    cursor: pointer;
 }
 .menu-type p {
     color: #b2b2b2;
@@ -89,4 +90,14 @@ main {
 .add-to-cart i {
     font-size: 18px;
     color: #fff;
+}
+.item-info h6 {
+    display: -webkit-box;
+    max-height: 3.2rem;
+   -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    line-height: 1.6rem;
 }

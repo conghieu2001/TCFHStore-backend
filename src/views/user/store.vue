@@ -9,16 +9,16 @@
     </div>
     <div class="store-container pt-4">
       <div class="row">
-        <div class="col-2 store-list">
+        <!-- <div class="col-2 store-list">
           <p>Các tỉnh thành</p>
           <ul>
             <li>Tp Hồ Chí Minh</li>
             <li>Hà Nội </li>
             <li>Cần Thơ </li>
           </ul>
-        </div>
-        <div class="col-10 store-detail">
-          <h4>Khám phá 72 cửa hàng của chúng tôi ở Tp Hồ Chí Minh</h4>
+        </div> -->
+        <div class="col-12 store-detail">
+          <!-- <h4>Khám phá 72 cửa hàng của chúng tôi ở Tp Hồ Chí Minh</h4> -->
           <div class="row">
             <div class="col-6 pb-5" v-for="store in stores" :key="store._id">
               <div class="store-img">
@@ -35,19 +35,19 @@
                   <a href=""><i class="fab fa-instagram-square"></i></a>
                   <a href=""><i class="fab fa-twitter-square"></i></a>
                 </div>
-                <hr />
-                <p>{{ store.address }}</p>
+                <hr/>
+                <p class="address-store">{{ store.address }}</p>
                 <p>7{{ store.timeStart }} - {{ store.timeEnd }}</p>
                 <div class="row">
                   <span class="col-6"
-                    ><i class="fas fa-car pe-3"></i>Có chỗ đỗ xe hơi</span
+                    ><i class="fas fa-car pr-3"></i>Có chỗ đỗ xe hơi</span
                   >
                   <span class="col-6"
-                    ><i class="fas fa-concierge-bell pe-3"></i>Phục vụ tại
+                    ><i class="fas fa-concierge-bell pr-3"></i>Phục vụ tại
                     chỗ</span
                   >
                   <span class="col-6"
-                    ><i class="fas fa-shopping-bag pe-3"></i>Mua mang đi</span
+                    ><i class="fas fa-shopping-bag pr-3"></i>Mua mang đi</span
                   >
                 </div>
               </div>

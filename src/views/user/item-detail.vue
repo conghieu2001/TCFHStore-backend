@@ -3,15 +3,16 @@
     <div class="item-detail-container">
       <div class="row">
         <div class="col-5 product-img">
-          <img :src="products.image" alt="" />
+          <img :src="aaaaa.image" alt="" />
         </div>
         <div class="col-7 product-info">
-          <h3>{{ products.name }}</h3>
-          <p class="product-price">{{ products.price }}đ</p>
+          <h3>{{ aaaaa.name }}</h3>
+          <p class="product-price">{{ aaaaa.price }}đ</p>
           <div class="product-size">
             <p>Vui lòng chọn size (bắt buộc)</p>
             <div class="size-select-group">
-              <div class="size-select mr-3 active">
+              <div class="size-select mr-3">
+                <input type="radio" name="size" value="s" v-model="this.size" />
                 <svg
                   class="me-1"
                   viewBox="0 0 13 16"
@@ -22,10 +23,10 @@
                     d="M11.6511 1.68763H10.3529V0.421907C10.3529 0.194726 10.1582 0 9.93104 0H2.17444C1.94726 0 1.75254 0.194726 1.75254 0.421907V1.65517H0.454361C0.194726 1.68763 0 1.88235 0 2.10953V4.18661C0 4.41379 0.194726 4.60852 0.421907 4.60852H1.33063L1.72008 8.8925L1.78499 9.76876L2.30426 15.6105C2.33671 15.8377 2.49899 16 2.72617 16H9.28195C9.50913 16 9.70385 15.8377 9.70385 15.6105L10.2231 9.76876L10.288 8.8925L10.6775 4.60852H11.5862C11.8134 4.60852 12.0081 4.41379 12.0081 4.18661V2.10953C12.073 1.88235 11.8783 1.68763 11.6511 1.68763ZM2.56389 8.40568H3.50507C3.47262 8.56795 3.47262 8.73022 3.47262 8.8925C3.47262 9.02231 3.47262 9.15213 3.50507 9.28195H2.66126L2.6288 8.92495L2.56389 8.40568ZM9.47667 8.92495L9.44422 9.28195H8.56795C8.60041 9.15213 8.60041 9.02231 8.60041 8.8925C8.60041 8.73022 8.56795 8.56795 8.56795 8.40568H9.50913L9.47667 8.92495ZM7.72414 8.8925C7.72414 9.83367 6.97769 10.5801 6.03651 10.5801C5.09534 10.5801 4.34888 9.83367 4.34888 8.8925C4.34888 7.95132 5.09534 7.20487 6.03651 7.20487C6.97769 7.20487 7.72414 7.95132 7.72414 8.8925ZM8.92495 15.1562H3.18053L2.72617 10.1582H3.82961C4.28398 10.9371 5.09534 11.4564 6.03651 11.4564C6.97769 11.4564 7.8215 10.9371 8.24341 10.1582H9.34686L8.92495 15.1562ZM9.60649 7.52941H8.21095C7.75659 6.81542 6.94523 6.3286 6.03651 6.3286C5.12779 6.3286 4.31643 6.81542 3.86207 7.52941H2.49899L2.23935 4.60852H9.86613L9.60649 7.52941ZM11.1968 3.73225H10.3205H1.75254H0.876268V2.56389H2.17444H2.2069H2.23935H8.27586C8.50304 2.56389 8.69777 2.36917 8.69777 2.14199C8.69777 1.91481 8.50304 1.72008 8.27586 1.72008H2.6288V0.876268H9.47667V2.10953C9.47667 2.33671 9.6714 2.53144 9.89858 2.53144H11.1968V3.73225Z"
                   ></path>
                 </svg>
-                <input type="radio" name="size" value="s" v-model="this.size"/>
                 <p>Nhỏ</p>
               </div>
               <div class="size-select mr-3">
+                <input type="radio" name="size" value="m" v-model="this.size" />
                 <svg
                   class="me-1"
                   viewBox="0 0 13 16"
@@ -36,10 +37,10 @@
                     d="M11.6511 1.68763H10.3529V0.421907C10.3529 0.194726 10.1582 0 9.93104 0H2.17444C1.94726 0 1.75254 0.194726 1.75254 0.421907V1.65517H0.454361C0.194726 1.68763 0 1.88235 0 2.10953V4.18661C0 4.41379 0.194726 4.60852 0.421907 4.60852H1.33063L1.72008 8.8925L1.78499 9.76876L2.30426 15.6105C2.33671 15.8377 2.49899 16 2.72617 16H9.28195C9.50913 16 9.70385 15.8377 9.70385 15.6105L10.2231 9.76876L10.288 8.8925L10.6775 4.60852H11.5862C11.8134 4.60852 12.0081 4.41379 12.0081 4.18661V2.10953C12.073 1.88235 11.8783 1.68763 11.6511 1.68763ZM2.56389 8.40568H3.50507C3.47262 8.56795 3.47262 8.73022 3.47262 8.8925C3.47262 9.02231 3.47262 9.15213 3.50507 9.28195H2.66126L2.6288 8.92495L2.56389 8.40568ZM9.47667 8.92495L9.44422 9.28195H8.56795C8.60041 9.15213 8.60041 9.02231 8.60041 8.8925C8.60041 8.73022 8.56795 8.56795 8.56795 8.40568H9.50913L9.47667 8.92495ZM7.72414 8.8925C7.72414 9.83367 6.97769 10.5801 6.03651 10.5801C5.09534 10.5801 4.34888 9.83367 4.34888 8.8925C4.34888 7.95132 5.09534 7.20487 6.03651 7.20487C6.97769 7.20487 7.72414 7.95132 7.72414 8.8925ZM8.92495 15.1562H3.18053L2.72617 10.1582H3.82961C4.28398 10.9371 5.09534 11.4564 6.03651 11.4564C6.97769 11.4564 7.8215 10.9371 8.24341 10.1582H9.34686L8.92495 15.1562ZM9.60649 7.52941H8.21095C7.75659 6.81542 6.94523 6.3286 6.03651 6.3286C5.12779 6.3286 4.31643 6.81542 3.86207 7.52941H2.49899L2.23935 4.60852H9.86613L9.60649 7.52941ZM11.1968 3.73225H10.3205H1.75254H0.876268V2.56389H2.17444H2.2069H2.23935H8.27586C8.50304 2.56389 8.69777 2.36917 8.69777 2.14199C8.69777 1.91481 8.50304 1.72008 8.27586 1.72008H2.6288V0.876268H9.47667V2.10953C9.47667 2.33671 9.6714 2.53144 9.89858 2.53144H11.1968V3.73225Z"
                   ></path>
                 </svg>
-                <input type="radio" name="size" value="m" v-model="this.size"/>
                 <p>Vừa + 10.000đ</p>
               </div>
               <div class="size-select">
+                <input type="radio" name="size" value="l" v-model="this.size" />
                 <svg
                   class="me-1"
                   viewBox="0 0 13 16"
@@ -50,12 +51,70 @@
                     d="M11.6511 1.68763H10.3529V0.421907C10.3529 0.194726 10.1582 0 9.93104 0H2.17444C1.94726 0 1.75254 0.194726 1.75254 0.421907V1.65517H0.454361C0.194726 1.68763 0 1.88235 0 2.10953V4.18661C0 4.41379 0.194726 4.60852 0.421907 4.60852H1.33063L1.72008 8.8925L1.78499 9.76876L2.30426 15.6105C2.33671 15.8377 2.49899 16 2.72617 16H9.28195C9.50913 16 9.70385 15.8377 9.70385 15.6105L10.2231 9.76876L10.288 8.8925L10.6775 4.60852H11.5862C11.8134 4.60852 12.0081 4.41379 12.0081 4.18661V2.10953C12.073 1.88235 11.8783 1.68763 11.6511 1.68763ZM2.56389 8.40568H3.50507C3.47262 8.56795 3.47262 8.73022 3.47262 8.8925C3.47262 9.02231 3.47262 9.15213 3.50507 9.28195H2.66126L2.6288 8.92495L2.56389 8.40568ZM9.47667 8.92495L9.44422 9.28195H8.56795C8.60041 9.15213 8.60041 9.02231 8.60041 8.8925C8.60041 8.73022 8.56795 8.56795 8.56795 8.40568H9.50913L9.47667 8.92495ZM7.72414 8.8925C7.72414 9.83367 6.97769 10.5801 6.03651 10.5801C5.09534 10.5801 4.34888 9.83367 4.34888 8.8925C4.34888 7.95132 5.09534 7.20487 6.03651 7.20487C6.97769 7.20487 7.72414 7.95132 7.72414 8.8925ZM8.92495 15.1562H3.18053L2.72617 10.1582H3.82961C4.28398 10.9371 5.09534 11.4564 6.03651 11.4564C6.97769 11.4564 7.8215 10.9371 8.24341 10.1582H9.34686L8.92495 15.1562ZM9.60649 7.52941H8.21095C7.75659 6.81542 6.94523 6.3286 6.03651 6.3286C5.12779 6.3286 4.31643 6.81542 3.86207 7.52941H2.49899L2.23935 4.60852H9.86613L9.60649 7.52941ZM11.1968 3.73225H10.3205H1.75254H0.876268V2.56389H2.17444H2.2069H2.23935H8.27586C8.50304 2.56389 8.69777 2.36917 8.69777 2.14199C8.69777 1.91481 8.50304 1.72008 8.27586 1.72008H2.6288V0.876268H9.47667V2.10953C9.47667 2.33671 9.6714 2.53144 9.89858 2.53144H11.1968V3.73225Z"
                   ></path>
                 </svg>
-                <input type="radio" name="size" value="l" v-model="this.size"/>
                 <p>Lớn + 16.000đ</p>
               </div>
             </div>
+            <div class="size-select-group mt-4">
+              <div class="size-select mr-3">
+                <input
+                  type="radio"
+                  name="sugar"
+                  value="100sg"
+                  v-model="this.sugar"
+                />
+                <svg
+                  class="me-1"
+                  viewBox="0 0 13 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    class="shape active"
+                    d="M11.6511 1.68763H10.3529V0.421907C10.3529 0.194726 10.1582 0 9.93104 0H2.17444C1.94726 0 1.75254 0.194726 1.75254 0.421907V1.65517H0.454361C0.194726 1.68763 0 1.88235 0 2.10953V4.18661C0 4.41379 0.194726 4.60852 0.421907 4.60852H1.33063L1.72008 8.8925L1.78499 9.76876L2.30426 15.6105C2.33671 15.8377 2.49899 16 2.72617 16H9.28195C9.50913 16 9.70385 15.8377 9.70385 15.6105L10.2231 9.76876L10.288 8.8925L10.6775 4.60852H11.5862C11.8134 4.60852 12.0081 4.41379 12.0081 4.18661V2.10953C12.073 1.88235 11.8783 1.68763 11.6511 1.68763ZM2.56389 8.40568H3.50507C3.47262 8.56795 3.47262 8.73022 3.47262 8.8925C3.47262 9.02231 3.47262 9.15213 3.50507 9.28195H2.66126L2.6288 8.92495L2.56389 8.40568ZM9.47667 8.92495L9.44422 9.28195H8.56795C8.60041 9.15213 8.60041 9.02231 8.60041 8.8925C8.60041 8.73022 8.56795 8.56795 8.56795 8.40568H9.50913L9.47667 8.92495ZM7.72414 8.8925C7.72414 9.83367 6.97769 10.5801 6.03651 10.5801C5.09534 10.5801 4.34888 9.83367 4.34888 8.8925C4.34888 7.95132 5.09534 7.20487 6.03651 7.20487C6.97769 7.20487 7.72414 7.95132 7.72414 8.8925ZM8.92495 15.1562H3.18053L2.72617 10.1582H3.82961C4.28398 10.9371 5.09534 11.4564 6.03651 11.4564C6.97769 11.4564 7.8215 10.9371 8.24341 10.1582H9.34686L8.92495 15.1562ZM9.60649 7.52941H8.21095C7.75659 6.81542 6.94523 6.3286 6.03651 6.3286C5.12779 6.3286 4.31643 6.81542 3.86207 7.52941H2.49899L2.23935 4.60852H9.86613L9.60649 7.52941ZM11.1968 3.73225H10.3205H1.75254H0.876268V2.56389H2.17444H2.2069H2.23935H8.27586C8.50304 2.56389 8.69777 2.36917 8.69777 2.14199C8.69777 1.91481 8.50304 1.72008 8.27586 1.72008H2.6288V0.876268H9.47667V2.10953C9.47667 2.33671 9.6714 2.53144 9.89858 2.53144H11.1968V3.73225Z"
+                  ></path>
+                </svg>
+                <p>100% Đường</p>
+              </div>
+              <div class="size-select mr-3">
+                <input
+                  type="radio"
+                  name="sugar"
+                  value="75sg"
+                  v-model="this.sugar"
+                />
+                <svg
+                  class="me-1"
+                  viewBox="0 0 13 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    class="shape active"
+                    d="M11.6511 1.68763H10.3529V0.421907C10.3529 0.194726 10.1582 0 9.93104 0H2.17444C1.94726 0 1.75254 0.194726 1.75254 0.421907V1.65517H0.454361C0.194726 1.68763 0 1.88235 0 2.10953V4.18661C0 4.41379 0.194726 4.60852 0.421907 4.60852H1.33063L1.72008 8.8925L1.78499 9.76876L2.30426 15.6105C2.33671 15.8377 2.49899 16 2.72617 16H9.28195C9.50913 16 9.70385 15.8377 9.70385 15.6105L10.2231 9.76876L10.288 8.8925L10.6775 4.60852H11.5862C11.8134 4.60852 12.0081 4.41379 12.0081 4.18661V2.10953C12.073 1.88235 11.8783 1.68763 11.6511 1.68763ZM2.56389 8.40568H3.50507C3.47262 8.56795 3.47262 8.73022 3.47262 8.8925C3.47262 9.02231 3.47262 9.15213 3.50507 9.28195H2.66126L2.6288 8.92495L2.56389 8.40568ZM9.47667 8.92495L9.44422 9.28195H8.56795C8.60041 9.15213 8.60041 9.02231 8.60041 8.8925C8.60041 8.73022 8.56795 8.56795 8.56795 8.40568H9.50913L9.47667 8.92495ZM7.72414 8.8925C7.72414 9.83367 6.97769 10.5801 6.03651 10.5801C5.09534 10.5801 4.34888 9.83367 4.34888 8.8925C4.34888 7.95132 5.09534 7.20487 6.03651 7.20487C6.97769 7.20487 7.72414 7.95132 7.72414 8.8925ZM8.92495 15.1562H3.18053L2.72617 10.1582H3.82961C4.28398 10.9371 5.09534 11.4564 6.03651 11.4564C6.97769 11.4564 7.8215 10.9371 8.24341 10.1582H9.34686L8.92495 15.1562ZM9.60649 7.52941H8.21095C7.75659 6.81542 6.94523 6.3286 6.03651 6.3286C5.12779 6.3286 4.31643 6.81542 3.86207 7.52941H2.49899L2.23935 4.60852H9.86613L9.60649 7.52941ZM11.1968 3.73225H10.3205H1.75254H0.876268V2.56389H2.17444H2.2069H2.23935H8.27586C8.50304 2.56389 8.69777 2.36917 8.69777 2.14199C8.69777 1.91481 8.50304 1.72008 8.27586 1.72008H2.6288V0.876268H9.47667V2.10953C9.47667 2.33671 9.6714 2.53144 9.89858 2.53144H11.1968V3.73225Z"
+                  ></path>
+                </svg>
+                <p>75% Đường</p>
+              </div>
+              <div class="size-select">
+                <input
+                  type="radio"
+                  name="sugar"
+                  value="50sg"
+                  v-model="this.sugar"
+                />
+                <svg
+                  class="me-1"
+                  viewBox="0 0 13 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    class="shape active"
+                    d="M11.6511 1.68763H10.3529V0.421907C10.3529 0.194726 10.1582 0 9.93104 0H2.17444C1.94726 0 1.75254 0.194726 1.75254 0.421907V1.65517H0.454361C0.194726 1.68763 0 1.88235 0 2.10953V4.18661C0 4.41379 0.194726 4.60852 0.421907 4.60852H1.33063L1.72008 8.8925L1.78499 9.76876L2.30426 15.6105C2.33671 15.8377 2.49899 16 2.72617 16H9.28195C9.50913 16 9.70385 15.8377 9.70385 15.6105L10.2231 9.76876L10.288 8.8925L10.6775 4.60852H11.5862C11.8134 4.60852 12.0081 4.41379 12.0081 4.18661V2.10953C12.073 1.88235 11.8783 1.68763 11.6511 1.68763ZM2.56389 8.40568H3.50507C3.47262 8.56795 3.47262 8.73022 3.47262 8.8925C3.47262 9.02231 3.47262 9.15213 3.50507 9.28195H2.66126L2.6288 8.92495L2.56389 8.40568ZM9.47667 8.92495L9.44422 9.28195H8.56795C8.60041 9.15213 8.60041 9.02231 8.60041 8.8925C8.60041 8.73022 8.56795 8.56795 8.56795 8.40568H9.50913L9.47667 8.92495ZM7.72414 8.8925C7.72414 9.83367 6.97769 10.5801 6.03651 10.5801C5.09534 10.5801 4.34888 9.83367 4.34888 8.8925C4.34888 7.95132 5.09534 7.20487 6.03651 7.20487C6.97769 7.20487 7.72414 7.95132 7.72414 8.8925ZM8.92495 15.1562H3.18053L2.72617 10.1582H3.82961C4.28398 10.9371 5.09534 11.4564 6.03651 11.4564C6.97769 11.4564 7.8215 10.9371 8.24341 10.1582H9.34686L8.92495 15.1562ZM9.60649 7.52941H8.21095C7.75659 6.81542 6.94523 6.3286 6.03651 6.3286C5.12779 6.3286 4.31643 6.81542 3.86207 7.52941H2.49899L2.23935 4.60852H9.86613L9.60649 7.52941ZM11.1968 3.73225H10.3205H1.75254H0.876268V2.56389H2.17444H2.2069H2.23935H8.27586C8.50304 2.56389 8.69777 2.36917 8.69777 2.14199C8.69777 1.91481 8.50304 1.72008 8.27586 1.72008H2.6288V0.876268H9.47667V2.10953C9.47667 2.33671 9.6714 2.53144 9.89858 2.53144H11.1968V3.73225Z"
+                  ></path>
+                </svg>
+                <p>50% Đường</p>
+              </div>
+            </div>
           </div>
-          <div class="add-to-cart mt-5" @click="loadShopCart(products)">
+          <div class="add-to-cart mt-5" @click="loadShopCart(aaaaa)">
             <svg
               class="me-1"
               width="21"
@@ -76,23 +135,53 @@
       <hr />
       <div class="product-description pt-4">
         <h5>Mô tả sản phẩm</h5>
-        <p>{{ products.description }}</p>
+        <p>{{ aaaaa.description }}</p>
       </div>
       <hr />
       <div class="product-related pt-4">
         <h5>Sản phẩm liên quan</h5>
         <div class="row pt-4">
-          <div class="col-2">
-            <div class="product-related-img">
-              <a href="product-detail.html"
-                ><img
-                  src=""
-                  alt=""
-              /></a>
+          <div class="col-2" v-for="item in this.products.loai" :key="item._id">
+            <div class="product-related-img" @click="gotoDetailItem(item._id)">
+              <!-- <router-link :to="'/detail/' + item._id" > -->
+                <img :src="item.image" alt=""
+              />
+            <!-- </router-link> -->
             </div>
             <div class="product-related-info pt-3">
-              <h6><a href="">CloudFee Caramel</a></h6>
-              <span>49.000 đ</span>
+              <h6>
+                <a href="">{{ item.name }}</a>
+              </h6>
+              <span>{{ item.price }} đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="commentByUser">
+        <div>
+          <h5>Bình luận</h5>
+          <form @submit="pushComment()">
+            <textarea
+              name=""
+              id=""
+              cols="95"
+              rows="5"
+              placeholder="Mời bạn bình luận"
+              v-model="this.comment"
+            ></textarea>
+            <button type="submit" :class="{'hide-submit-comment': !isCheckUser}">Gửi</button>
+          </form>
+          <hr>
+          <div class="commented-byUser">
+            <div class="row" v-for="bbb in this.bbbbb" :key="bbb._id">
+              <div class="d-flex justify-content-center">
+                <img :src="bbb.image" alt="">
+                <div>
+                  <h6>{{ bbb.nameus }}</h6>
+                <p>{{ bbb.comment }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -103,32 +192,42 @@
 
 <script>
 import ItemService from "../../services/item.service";
+import CmtService from "../../services/cmt.service";
 export default {
   data() {
     return {
       IBestID: "",
-      products: [],
-      size: 'S',
+      products: '',
+      aaaaa: '',
+      size: "S",
       priceSize: 0,
+      sugar: "100",
+      items: [],
+      UserName: '',
+      UserID: '',
+      comment: '',
+      UserImage: '',
+      ItemComment: [],
+      bbbbb: [], //san pham lien quan
+      // itemLoai: [],
+      isCheckUser: false,
     };
   },
   methods: {
-    async gotoDetailItem() {
-      if (this.$route.params.id) {
-        this.IBestID = this.$route.params.id;
+    async gotoDetailItem(id) {
+      if (id) {
+        this.IBestID = id;
         try {
           this.products = await ItemService.get(this.IBestID);
-          console.log(this.products);
+          this.aaaaa = await this.products.product;
+          this.bbbbb = await this.products.comments;
+          const linkDT = '/detail/' +id;
+          this.$router.replace({path: linkDT});
         } catch (error) {
           console.log(error);
         }
       }
     },
-    aaa() {
-      console.log(123);
-      console.log(this.$route.params.id);
-    },
-
     isExistedInCart(item, arrCart) {
       let myIndex = -1;
       arrCart.forEach((itemCart, index) => {
@@ -140,14 +239,21 @@ export default {
     },
     loadShopCart(product) {
       let updatedCart = [];
-      console.log(product);
+      // console.log(product);
       // const linkClicked = evt.target;
-      if(this.size == 'm') {
+      if (this.size == "m") {
         this.priceSize = 10000 + parseInt(product.price);
-      } else if(this.size == 'l'){
+      } else if (this.size == "l") {
         this.priceSize = 16000 + parseInt(product.price);
       } else {
         this.priceSize = product.price;
+      }
+      if (this.sugar == "50sg") {
+        this.sugar = "50%";
+      } else if (this.sugar == "75sg") {
+        this.sugar = "75%";
+      } else {
+        this.sugar = "100%";
       }
       alert("Đã thêm sản phẩm: " + product._id);
       if (typeof Storage !== undefined) {
@@ -155,6 +261,7 @@ export default {
           id: product._id,
           name: product.name,
           size: this.size,
+          sugar: this.sugar,
           image: product.image,
           price: this.priceSize,
           quantity: 1,
@@ -182,19 +289,98 @@ export default {
           localStorage.setItem("cartItems", JSON.stringify(updatedCart));
           //reset lại trang
           // window.location.reload();
+          location.reload();
         }
       } else {
         alert("Local Storage is not working on your browser!!!");
       }
     },
+    getUser() {
+      const user = JSON.parse(localStorage.getItem('users'))
+      if (localStorage.getItem('users') != null) {
+        this.UserName = user.name;
+        this.UserID = user._id;
+        this.UserImage = user.image;
+        this.isCheckUser = true;
+        // console.log(this.UserID, this.UserName)
+      }
+    },
+    async pushComment() {
+      const infoUserCommented = {
+        nameus: this.UserName,
+        comment: this.comment,
+        idus: this.UserID,
+        idpd: this.aaaaa._id,
+        image: this.UserImage,
+      }
+      try {
+        await CmtService.create(infoUserCommented);
+      } catch(error) {
+        console.log(error);
+      }
+    },
+
   },
   mounted() {
-    this.aaa();
-    this.gotoDetailItem();
+    // this.aaa();
+    if (this.$route.params.id) {
+      this.gotoDetailItem(this.$route.params.id);
+        
+      }
+    this.getUser();
   },
 };
 </script>
 
 <style scoped>
 @import "@/assets/product-detail.css";
+.commentByUser {
+  width: 780px;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.commentByUser>div>h5 {
+  padding-bottom: 10px;
+  font: 14px/18px Arial,Helvetica,sans-serif;
+  color: #222b45;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+.commented-byUser img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.commentByUser h6 {
+  padding-left: 10px;
+  padding-top: 10px;
+  color: #222b45;
+  font-weight: bold;
+    font-size: 14px;
+}
+.commented-byUser p {
+  font: 14px/18px Arial,Helvetica,sans-serif;
+  margin-left: 10px;
+}
+.commentByUser form>textarea{
+  border-radius: 8px;
+    border: 1px solid #8f9bb3;
+    height: 80px;
+    padding: 6px 10px 6px;
+}
+.commentByUser>div>form>button {
+  background-color: #eebc49;
+  border: none;
+  width: 150px;
+  height: 30px;
+  border-radius: 7px;
+  color: #fff;
+  float: right;
+}
+.hide-submit-comment {
+  display: none;
+}
 </style>

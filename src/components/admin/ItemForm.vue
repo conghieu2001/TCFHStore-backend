@@ -56,6 +56,28 @@
       <!-- <ErrorMessage name="price" class="error-feedback" /> -->
     </div>
     <div class="form-group">
+      <label for="loaiItem">Loại sản phẩm (coffee, tea, hitea)</label>
+      <input
+        name="loaiItem"
+        type="text"
+        class="form-control"
+        v-model="itemLocal.loaiItem"
+        required
+      />
+      <!-- <ErrorMessage name="price" class="error-feedback" /> -->
+    </div>
+    <div class="form-group form-check">
+      <input
+        name="bestsale"
+        type="checkbox"
+        class="form-check-input"
+        v-model="itemLocal.bestsale"
+      />
+      <label for="favorite" class="form-check-label">
+        <strong>Chọn làm sản phẩm bestsaler</strong>
+      </label>
+    </div>
+    <div class="form-group">
       <button class="btn btn-primary">Lưu</button>
     </div>
   </form>

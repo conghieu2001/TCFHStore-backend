@@ -113,20 +113,20 @@
           <div>
             <h3 class="blog-home-blogtitle"><a href="">Coffeeholic</a></h3>
             <div class="row">
-              <div class="col-4" v-for="(post, index) in posts" :key="index">
-                <div v-if="post.loai === 'coffeeholic'">
+              <div class="col-4" v-for="(postc, index) in postsCoffee" :key="index">
+                <div>
                   <div class="blog-img">
                     <a href="">
-                      <img :src="post.image" alt="" />
+                      <img :src="postc.image" alt="" />
                     </a>
                   </div>
                   <div class="blog-info">
-                    <div class="date">{{ post.date }}</div>
+                    <div class="date">{{ postc.date }}</div>
                     <h3>
-                      {{ post.name }}
+                      {{ postc.name }}
                     </h3>
                     <p>
-                      {{ post.description }}
+                      {{ postc.description }}
                     </p>
                   </div>
                 </div>
@@ -137,20 +137,43 @@
           <div>
             <h3 class="blog-home-blogtitle"><a href="">Teaholic</a></h3>
             <div class="row">
-              <div class="col-4" v-for="(post) in posts" :key="post._id">
-                <div v-if="post.loai === 'teaholic'">
+              <div class="col-4" v-for="(postt) in postsTea" :key="postt._id">
+                <div>
                   <div class="blog-img">
                     <a href="">
-                      <img :src="post.image" alt="" />
+                      <img :src="postt.image" alt="" />
                     </a>
                   </div>
                   <div class="blog-info">
-                    <div class="date">{{ post.date }}</div>
+                    <div class="date">{{ postt.date }}</div>
                     <h3>
-                      {{ post.name }}
+                      {{ postt.name }}
                     </h3>
                     <p>
-                      {{ post.description }}
+                      {{ postt.description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="blog-home-blogtitle"><a href="">Blog</a></h3>
+            <div class="row">
+              <div class="col-4" v-for="(postb) in postsBlog" :key="postb._id">
+                <div>
+                  <div class="blog-img">
+                    <a href="">
+                      <img :src="postb.image" alt="" />
+                    </a>
+                  </div>
+                  <div class="blog-info">
+                    <div class="date">{{ postb.date }}</div>
+                    <h3>
+                      {{ postb.name }}
+                    </h3>
+                    <p>
+                      {{ postb.description }}
                     </p>
                   </div>
                 </div>
@@ -171,6 +194,9 @@ export default {
     return {
       itemBests: [],
       posts: [],
+      postsCoffee: [],
+      postsTea: [],
+      postsBlog: [],
     };
   },
   methods: {
@@ -183,7 +209,24 @@ export default {
     },
     async getPost() {
       try {
+        let countc =0;
+        let countt =0;
+        let countb =0;
         this.posts = await PostService.getAll();
+        // console.log(this.posts[0].loai)
+        for(let i = 0; i < this.posts.length; i++) {
+          if(this.posts[i].loai == 'coffeeholic') {
+            this.postsCoffee[countc] = this.posts[i];
+            countc ++;
+          } else if(this.posts[i].loai == 'teaholic') {
+            this.postsTea[countt] = this.posts[i];
+            countt ++;
+          } else {
+            this.postsBlog[countb] = this.posts[i];
+            countb ++;
+          }
+        }
+        // console.log(this.postsCoffee, '1')
       } catch (error) {
         console.log(error);
       }
@@ -191,8 +234,10 @@ export default {
   },
   created() {
     this.getItemBestSale();
-    this.getPost();
   },
+  mounted() {
+    this.getPost();
+  }
 };
 </script>
 

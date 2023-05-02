@@ -6,7 +6,7 @@
       </div>
       <div class="mt-3 col-md-12">
         <div class="d-flex">
-          <router-link to="/">
+          <router-link to="/admin">
             <button class="btn btn-dark ">
               <i class="fa-solid fa-chevron-left"></i>
             </button>
@@ -29,9 +29,9 @@
           <!-- <button class="btn btn-sm btn-primary" @click="refreshList()">
             <i class="fas fa-redo"></i> Làm mới
           </button> -->
-          <button class="btn btn-sm btn-danger" @click="removeAllStores">
+          <!-- <button class="btn btn-sm btn-danger" @click="removeAllStores">
             <i class="fas fa-trash"></i> Xóa tất cả
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

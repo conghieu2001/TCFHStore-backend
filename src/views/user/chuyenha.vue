@@ -7,12 +7,12 @@
         kết nối con người và sẻ chia thân tình bên những tách cà phê, ly trà
         đượm hương, truyền cảm hứng về lối sống hiện đại.
       </div>
-      <ul class="head-tabs">
+      <!-- <ul class="head-tabs">
         <li><a class="tab-filter active" href="">Tất cả</a></li>
         <li><a class="tab-filter" href="">Coffeeholic</a></li>
         <li><a class="tab-filter" href="">Teaholic</a></li>
         <li><a class="tab-filter" href="">Blog</a></li>
-      </ul>
+      </ul> -->
     </div>
     <section class="section-container pt-4">
             <div class="row">

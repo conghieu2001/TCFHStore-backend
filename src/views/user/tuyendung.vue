@@ -5,7 +5,7 @@
         <h4>Liên hệ với chúng tôi</h4>
         <div class="contact-method">
           <div class="contact-email">
-            <i class="fa-solid fa-envelope me-2"></i>
+            <i class="fa-solid fa-envelope mr-2"></i>
             <address>
               <a href="mailto:conghieu16st@gmail.com.com"
                 >thecoffeehouse@gmail.com</a
@@ -13,7 +13,7 @@
             </address>
           </div>
           <div class="contact-phonenumber">
-            <i class="fa-solid fa-phone me-2"></i>
+            <i class="fa-solid fa-phone mr-2"></i>
             <address><a href="tel:0907580331">0907 580 331</a></address>
           </div>
         </div>

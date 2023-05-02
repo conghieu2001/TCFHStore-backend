@@ -30,11 +30,12 @@ export default {
     <thead class="table-info">
       <tr>
         <th scope="col">STT</th>
-        <th scope="col">ID</th>
+        <!-- <th scope="col">ID</th> -->
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Image</th>
         <th scope="col">Price</th>
+        <th scope="col">Loại</th>
         <th class="text-center" scope="col">Option</th>
       </tr>
     </thead>
@@ -46,11 +47,12 @@ export default {
         @click="updateActiveIndex(index)"
       >
         <td>{{ index }}</td>
-        <td>{{ item._id }}</td>
+        <!-- <td>{{ item._id }}</td> -->
         <td>{{ item.name }}</td>
         <td class="td-description">{{ item.description }}</td>
         <td class="td-image"><img :src="item.image" alt=""></td>
         <td>{{ item.price }}</td>
+        <td>{{ item.loaiItem }}</td>
         <td class="option-click">
           <router-link
             :to="{
@@ -95,7 +97,7 @@ table {
   height: 100%;
 }
 .td-description {
-  width: 400px;
+  width: 450px !important;
   display: -webkit-box;
   max-height: 4rem;
   -webkit-box-orient: vertical;

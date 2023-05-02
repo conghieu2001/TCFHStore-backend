@@ -6,7 +6,7 @@
         </div>
         <div class="mt-3 col-md-12">
           <div class="d-flex">
-            <router-link to="/">
+            <router-link to="/admin">
               <button class="btn btn-dark ">
                 <i class="fa-solid fa-chevron-left"></i>
               </button>

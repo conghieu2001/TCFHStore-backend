@@ -37,23 +37,23 @@
       <label for="price">Date</label>
       <input
         name="date"
-        type="text"
+        type="date"
         class="form-control"
         v-model="postLocal.date"
         required
       />
       <!-- <ErrorMessage name="price" class="error-feedback" /> -->
     </div>
-    <div class="form-group form-check">
+    <div class="form-group">
+      <label for="price">Loại (coffeholic, teaholic, blog)</label>
       <input
-        name="banner"
-        type="checkbox"
-        class="form-check-input"
-        v-model="postLocal.banner"
+        name="loai"
+        type="text"
+        class="form-control"
+        v-model="postLocal.loai"
+        required
       />
-      <label for="favorite" class="form-check-label">
-        <strong>Chọn làm bài viết tiêu biểu</strong>
-      </label>
+      <!-- <ErrorMessage name="price" class="error-feedback" /> -->
     </div>
 
     <div class="form-group">

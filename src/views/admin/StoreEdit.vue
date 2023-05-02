@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="back-show">
-      <router-link to="/ShowStore">
+      <router-link to="/stores">
         <div class="back-show-items">
           <i class="fa-solid fa-chevron-left"></i> Quay lại
         </div>

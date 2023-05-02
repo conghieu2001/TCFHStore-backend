@@ -34,7 +34,7 @@ export default {
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Image</th>
-        <th scope="col">Banner</th>
+        <th scope="col">Loai</th>
         <th class="text-center" scope="col">Option</th>
       </tr>
     </thead>
@@ -50,7 +50,7 @@ export default {
         <td class="td-name">{{ post.name }}</td>
         <td class="td-description">{{ post.description }}</td>
         <td class="td-image"><img :src="post.image" alt="" /></td>
-        <td class="text-center">{{ post.banner }}</td>
+        <td class="text-center">{{ post.loai }}</td>
         <td class="option-click">
           <router-link
             :to="{

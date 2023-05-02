@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="wrapper">
-      <form class="form-signin" @submit="isValidateFormLogin()">
+      <form class="form-signin" @submit.prevent="submitLogin()">
         <img
           class="login-banner"
           src="https://order.thecoffeehouse.com/_nuxt/img/thumbnail-login-pop-up.e10d0dd.png"
@@ -29,9 +29,9 @@
             }"
             required
           />
-          <div class="valid-feedback">
+          <!-- <div class="valid-feedback">
             Bạn đã nhập Email, vui lòng xem lại thông tin trước khi submit!
-          </div>
+          </div> -->
           <div class="invalid-feedback">
             {{ errors.email }}
           </div>
@@ -49,9 +49,9 @@
             }"
             required
           />
-          <div class="valid-feedback">
+          <!-- <div class="valid-feedback">
             Bạn đã nhập mật khẩu, vui lòng xem lại thông tin trước khi submit!
-          </div>
+          </div> -->
           <div class="invalid-feedback">
             {{ errors.password }}
           </div>
@@ -65,10 +65,14 @@
   </main>
 </template>
 <script>
+import UserService from "@/services/user.service";
 export default {
   data() {
     return {
-      user: {},
+      user: {
+        email: "",
+        matkhau: "",
+      },
       errors: {
         email: "",
         password: "",
@@ -108,18 +112,30 @@ export default {
     // ham submitlogin
     async submitLogin() {
       this.isValidateFormLogin();
-      // console.log(this.isValidateForm())
       if (this.isValidateFormLogin()) {
-        // console.log(this.user);
-        const resultLogin = await AccountService.loginAccount(this.user);
-        // console.log(resultLogin.user);
-        localStorage.setItem("Users", JSON.stringify(resultLogin.user));
-        // console.log(JSON.parse(localStorage.getItem('Users')))
-        alert(resultLogin.message);
+        const resultLogin = await UserService.login(this.user);
+        localStorage.setItem("users", JSON.stringify(resultLogin.user));
+        // console.log(JSON.parse(localStorage.getItem("users")))
+        if (JSON.parse(localStorage.getItem("users")) != null) {
+          if (resultLogin.user.quyen === 1) {
+            alert(resultLogin.message);
+            this.reloadPage();
+          } else if (resultLogin.user.quyen === 0) {
+            // localStorage.setItem("users", JSON.stringify(resultLogin.user));
+            alert("Bạn đăng nhập thành công với tư cách Admin!");
+            // location.reload();
+            this.$router.push({ name: "HomeAdmin" });
+          }
+        } else {
+          alert("Bạn đã nhập sai tài khoản hoặc mật khẩu!");
+          localStorage.removeItem("users");
+          location.reload();
+        }
+        // }
       }
-      // else {
-      //     alert('Bạn nhập đầy đủ thông tin');
-      // }
+    },
+    reloadPage() {
+      window.location.reload();
     },
   },
 };

@@ -9,7 +9,7 @@
     </div>
     <div v-if="item" class="page container">
     <h4>Hiệu chỉnh Sản phẩm</h4>
-    <ItemForm class="pt-3 pb-3" :item="item" @submit:item="updateItem" />
+    <ItemForm class="pt-3 pb-3" :item="item.product" @submit:item="updateItem" />
     <!-- <p>{{ message }}</p> -->
   </div>
   </div>
@@ -34,6 +34,7 @@ export default {
     async getItem(id) {
       try {
         this.item = await ItemService.get(id);
+        console.log(this.item)
       } catch (error) {
         console.log(error);
         this.$router.push({
@@ -48,7 +49,7 @@ export default {
     },
     async updateItem(data) {
       try {
-        await ItemService.update(this.item._id, data);
+        await ItemService.update(this.item.product._id, data);
   
         
       } catch (error) {

@@ -1,6 +1,3 @@
-
-import router from '../router';
-
 <template>
   <div class="top-bar pt-2 pb-2">
     <div class="container">
@@ -40,27 +37,108 @@ import router from '../router';
         </div>
         <div class="header__icon pt-3 col-3 d-flex align-items-baseline">
           <div class="header__icon--search">
-            <form action="">
-              <input type="text" placeholder="Tìm kiếm" />
-              <button><i class="fas fa-search"></i></button>
-            </form>
+            <div>
+              <input name="name" type="text" placeholder="Tìm kiếm" v-model="inputSearch" />
+              <button @click="searchPage"><i class="fas fa-search"></i></button>
+            </div>
           </div>
           <div class="header__icon--cart">
             <router-link to="/cart">
               <i class="fas fa-shopping-cart"></i>
-              <span>0</span>
+              <span>{{ this.amountItem }}</span>
             </router-link>
           </div>
           <div class="header__icon--user">
-            <router-link to="/Login">
-              <i class="fas fa-user-alt"></i>
-            </router-link>
+            
+              <i class="fas fa-user-alt" :class="{ 'dropdownHidden': isLoginUser }"></i>
+              <img :src="this.UserImage" alt="" class="user-image" :class="{ 'dropdownHidden': !isLoginUser }">
+            
+            <div class="block-user">
+              <i class="fas fa-sort-up fa-lg block-user-sort-up"></i>
+              <div class="abcdf">
+                <router-link to="/detail-user"><div class="dropdown-item name-account">{{ this.UserName }}</div></router-link>
+                <div class="dropdown-item">
+                  <i class="fa-sharp fa-solid fa-clock-rotate-left mr-2"></i>
+                <router-link to="/userOrder">
+                  Xem đơn hàng
+                </router-link>
+              </div>
+              <div class="dropdown-item mb-2" :class="{ 'dropdownHidden': isLoginUser }"><router-link to="/Login"><i class="fa-solid fa-right-to-bracket mr-2"></i> Đăng nhập</router-link></div>
+              <!-- <div class="dropdown-item " :class="{ 'dropdownHidden': !isLoginUser }"><i class="fas fa-exchange mr-2"></i> Đổi mật khẩu </div> -->
+              <div @click="logOutUser()" class="dropdown-item mb-2" :class="{ 'dropdownHidden': !isLoginUser }"><i class="fas fa-sign-out-alt mr-2"></i> Đăng xuất </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </header>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      amountItem: 0,
+      isLoginUser: false,
+      UserName: '',
+      UserImage: '',
+    }
+  },
+  methods: {
+    searchPage(){
+      if(this.inputSearch==''){
+        alert('Bạn chưa nhập từ khóa!')
+      }else{
+        this.$router.push({name:'product.search',params:{searchString:this.inputSearch}})
+        // this.$router.push("")
+      }
+    },
+    totalItem() {
+      if (localStorage.getItem('cartItems') != null) {
+        if (JSON.parse(localStorage.getItem('cartItems')).length != 0) {
+          let customerCart = JSON.parse(localStorage.getItem('cartItems'));
+          customerCart.forEach(item => {
+            this.amountItem = this.amountItem + item.quantity;
+          });
+        }
+      }
+    },
+    checkLoginUser() {
+      // console.log(JSON.parse(localStorage.getItem('Users')))
+      if (JSON.parse(localStorage.getItem('users')) != null) {
+        this.isLoginUser = true;
+      }
+    },
+    logOutUser() {
+      const user = JSON.parse(localStorage.getItem('users'))
+      if (localStorage.getItem('users') != null) {
+        localStorage.removeItem('users');
+        this.isLogin = false;
+        // this.$router.push({ name: "Home" });
+        location.reload();
+      }
+    },
+    getUserName() {
+      const user = JSON.parse(localStorage.getItem('users'))
+      if (localStorage.getItem('users') != null) {
+        this.UserName = user.name;
+      }
+    },
+    getUserImage() {
+      const user = JSON.parse(localStorage.getItem('users'))
+      if (localStorage.getItem('users') != null) {
+        this.UserImage = user.image;
+      }
+    }
+  },
+  mounted() {
+    this.totalItem();
+    this.checkLoginUser();
+    this.getUserName();
+    this.getUserImage();
+  }
+}
+</script>
 <style scoped>
 a {
   text-decoration: none;
@@ -120,13 +198,14 @@ header {
   background-color: rgb(189, 189, 189);
   border: none;
   position: absolute;
-  right: 16px;
+  right: 31px;
   margin-top: 1px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 .header__icon--cart {
   position: relative;
+  width: 200px;
 }
 .header__icon span {
   position: absolute;
@@ -147,5 +226,53 @@ header {
 }
 .header__icon--user a:hover {
   color: #000;
+}
+.dropdownHidden {
+  display: none;
+}
+.block-user {
+  display: none;
+  padding-right: 0px !important;
+  background-color: #d4d4d4;
+  margin-left: -50px;
+  margin-top: 10px;
+  /* text-align: center; */
+  position: absolute;
+  border-radius: 5px;
+  width: 210px;
+}
+.block-user>.abcdf {
+  margin-top: -15px;
+  padding-right: 0px !important;
+}
+.header__icon--user:hover .block-user {
+  display: block;
+}
+.block-user-sort-up {
+  position: relative;
+  top: -7px;
+  left: 50px;
+}
+.fa-sort-up {
+  color: #d4d4d4;
+  font-size: 30px;
+}
+.dropdown-item {
+  cursor: pointer;
+}
+.fa-list,.fa-exchange, .fa-sign-out-alt {
+  color: #6c757d;
+}
+.dropdown-item:hover{
+  background-color: #ecf4fc;
+}
+.name-account {
+  font-weight: bold;
+  color: #6c757d;
+}
+.user-image {
+  width: 30px;
+  height: 30px;
+  /* border-radius: 50%; */
 }
 </style>

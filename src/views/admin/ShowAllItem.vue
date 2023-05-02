@@ -6,7 +6,7 @@
       </div>
       <div class="mt-3 col-md-12">
         <div class="d-flex">
-          <router-link to="/">
+          <router-link to="/admin">
             <button class="btn btn-dark ">
               <i class="fa-solid fa-chevron-left"></i>
             </button>
@@ -17,11 +17,11 @@
               <i class="fas fa-plus"></i> Thêm sản phẩm
             </button>
           </router-link>
-          <router-link :to="{name: 'item.trash'}">
+          <!-- <router-link :to="{name: 'item.trash'}">
             <button class="trash-stored btn btn-secondary">
             <i class="fas fa-trash-alt"></i>
           </button>
-          </router-link>
+          </router-link> -->
 
         </div>
         <ItemList
@@ -35,9 +35,7 @@
           <!-- <button class="btn btn-sm btn-primary" @click="refreshList()">
             <i class="fas fa-redo"></i> Làm mới
           </button> -->
-          <button class="btn btn-sm btn-danger" @click="removeAllContacts">
-            <i class="fas fa-trash"></i> Xóa tất cả
-          </button>
+          <!--   -->
         </div>
       </div>
     </div>
@@ -99,7 +97,7 @@ export default {
       this.activeIndex = -1;
     },
     async removeAllItems() {
-      if (confirm("Bạn muốn xóa tất cả Liên hệ?")) {
+      if (confirm("Bạn muốn xóa tất cả Sản phẩm?")) {
         try {
           await ItemService.deleteAll();
           this.refreshList();

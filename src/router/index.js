@@ -9,12 +9,32 @@ import Cuahang from "@/views/user/store.vue";
 import Login from "@/views/user/login.vue";
 import Cart from "@/views/user/cart.vue";
 import Signup from "@/views/user/signup.vue";
+import UserOder from "@/views/user/userOrder.vue";
+import DetailUser from "@/views/user/detail-user.vue";
+import searchProduct  from "@/views/user/ProductSearch.vue";
 import HeaderUser from "../components/user-header.vue";
 import HeaderCart from "../components/cart-header.vue";
 import FooterUser from "../components/user-footer.vue";
+import AppHeader from "../components/AppHeader.vue";
+import ShowAllItem from "@/views/admin/ShowAllItem.vue";
+import ItemEdit from "@/views/admin/ItemEdit.vue";
+import ItemAdd from "@/views/admin/ItemAdd.vue";
+import ShowAllPost from "@/views/admin/ShowAllPost.vue";
+import PostAdd from "@/views/admin/PostAdd.vue";
+import PostEdit from "@/views/admin/PostEditt.vue";
+import Recruitment from "@/views/admin/recruitment.vue";
+import RecAdd from "@/views/admin/RecAdd.vue";
+import RecEdit from "@/views/admin/RecEdit.vue";
+import StoreEdit from "@/views/admin/StoreEdit.vue";
+import StoreAdd from "@/views/admin/StoreAdd.vue";
+import ShowStore from "@/views/admin/ShowStore.vue";
+import ShowOrders from "@/views/admin/ShowAllOrder.vue";
+import ShowComment from "@/views/admin/ShowComment.vue";
 const routes = [
+  //Home
   {
     path: "/",
+    name: "Home",
     components: {
       default: Home,
       "user-header":HeaderUser,
@@ -22,6 +42,7 @@ const routes = [
     },
     meta: {title: "Home"}
   },
+  //detail item
   {
     path: "/detail/:id",
     name: "Detail",
@@ -33,6 +54,7 @@ const routes = [
     props: true,
     meta: {title: "Chi tiết sản phẩm"}
   },
+  //menu item
   {
     path: "/menuItem",
     name: "MenuItem",
@@ -44,6 +66,7 @@ const routes = [
     props: true,
     meta: {title: "Tất cả sản phẩm"}
   },
+  //chuyện nhà
   {
     path: "/chuyennha",
     name: "Chuyennha",
@@ -55,6 +78,7 @@ const routes = [
     props: true,
     meta: {title: "Chuyện cà phê và trà"}
   },
+  //cửa hàng
   {
     path: "/store",
     name: "Cuahang",
@@ -66,6 +90,7 @@ const routes = [
     props: true,
     meta: {title: "Danh sách cửa hàng"}
   },
+  //tuyển dụng
   {
     path: "/tuyendung",
     name: "Tuyendung",
@@ -77,6 +102,7 @@ const routes = [
     props: true,
     meta: {title: "Danh sách cửa hàng"}
   },
+  //login
   {
     path: "/Login",
     name: "Login",
@@ -88,6 +114,7 @@ const routes = [
     props: true,
     meta: {title: "Đăng nhập"}
   },
+  //đăng kí
   {
     path: "/Signup",
     name: "Signup",
@@ -99,6 +126,7 @@ const routes = [
     props: true,
     meta: {title: "Đăng kí"}
   },
+  //giỏ hàng
   {
     path: "/cart",
     name: "Cart",
@@ -110,69 +138,143 @@ const routes = [
     props: true,
     meta: {title: "Giỏ hàng"}
   },
+  //detail user
+  {
+    path: "/detail-user",
+    name: "DetailUser",
+    components: {
+      default: DetailUser,
+      "user-header":HeaderUser,
+      "user-footer":FooterUser,
+    },
+    props: true,
+    meta: {title: "Chỉnh sửa thông tin cá nhân"}
+  },
+  //xem hoa document{
+  {
+  path: "/userOrder",
+    name: "UserOder",
+    components: {
+      default: UserOder,
+      "user-header":HeaderUser,
+      "user-footer":FooterUser,
+    },
+    props: true,
+    meta: {title: "Lịch sử mua hàng"}
+  },
+  //admin
   {
     path: "/admin",
     name: "HomeAdmin",
-    component: HomeAdmin,
+    components: {
+      default: HomeAdmin,
+      "user-header":AppHeader,
+      // "user-footer":FooterUser,
+    },
+    props: true,
+    meta: {title: "Trang chủ Admin"}
   },
+  //Error
   {
     path: "/:pathMatch(.*)*",
     name: "notfound",
     component: () => import("@/views/NotFound.vue"),
-  },    
+  }, 
+  //show all item   
   {
     path: "/items",
     name: "ShowAllItem",
-    component: () => import('@/views/ShowAllItem.vue'),
+    components: {
+      default: ShowAllItem,
+      "user-header":AppHeader,
+    },
     props: true,
+    meta: {title: "Tất cả sản phẩm"}
   },
+  //Edit item
   {
     path: "/edit/:id",
     name: "item.edit",
-    component: () => import("@/views/ItemEdit.vue"),
-    props: true 
+    components: {
+      default: ItemEdit,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Chỉnh sửa sản phẩm"}
   },
+  //sửa sản phẩm
   {
     path: "/post/:id",
     name: "post.edit",
-    component: () => import("@/views/PostEdit.vue"),
-    props: true 
+    components: {
+      default: PostEdit,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Chỉnh sửa bài viết"}
   },
   {
     path: "/rec/:id",
     name: "rec.edit",
-    component: () => import("@/views/RecEdit.vue"),
-    props: true 
+    components: {
+      default: RecEdit,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Chỉnh sửa tin tuyển dụng"}
   },
   {
     path: "/store/:id",
     name: "store.edit",
-    component: () => import("@/views/StoreEdit.vue"),
-    props: true 
+    components: {
+      default: StoreEdit,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Chỉnh sửa cửa hàng"}
   },
+  //thêm sản phẩm
   {
     path: "/add",
     name: "item.add",
-    component: () => import("@/views/ItemAdd.vue"),
+    components: {
+      default: ItemAdd,
+      "user-header":AppHeader,
+    },
     props: true,
+    meta: {title: "Thêm sản phẩm"}
   },
+  //thêm bài viết
   {
     path: "/posts/add",
     name: "post.add",
-    component: () => import("@/views/PostAdd.vue"),
+    components: {
+      default: PostAdd,
+      "user-header":AppHeader,
+    },
     props: true,
+    meta: {title: "Thêm bài viết"}
   },
+  //Thêm tin tuyển dụng
   {
     path: "/recs/add",
     name: "rec.add",
-    component: () => import("@/views/RecAdd.vue"),
+    components: {
+      default: RecAdd,
+      "user-header":AppHeader,
+    },
     props: true,
+    meta: {title: "Thêm tin tuyển dụng"}
   },
   {
     path: "/store/add",
     name: "store.add",
-    component: () => import("@/views/StoreAdd.vue"),
-    props: true,
+    components: {
+      default: StoreAdd,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Thêm cửa hàng"}
   },
   {
     path: "/trash",
@@ -180,24 +282,69 @@ const routes = [
     component: () => import("@/views/ShowTrash.vue"),
     props: true,
   },
+  //Show All Post
   {
     path: "/posts",
     name: "ShowAllPost",
-    component: () => import("@/views/ShowAllPost.vue"),
-    props: true,
+    components: {
+      default: ShowAllPost,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Tất cả bài viết"}
   },
+  //show tuyển dụng
   {
     path: "/recruitments",
-    name: "Recruiments",
-    component: () => import("@/views/recruitment.vue"),
+    name: "Recruitment",
+    components: {
+      default: Recruitment,
+      "user-header":AppHeader,
+    },
     props: true,
+    meta: {title: "Tất cả bài tuyển dụng"}
   },
   {
     path: "/stores",
     name: "ShowStore",
-    component: () => import("@/views/ShowStore.vue"),
-    props: true,
-  }
+    components: {
+      default: ShowStore,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Tất cả cửa hàng"}
+  },
+  {
+    path: "/orders",
+    name: "ShowOrders",
+    components: {
+      default: ShowOrders,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Tất cả đơn hàng"}
+  },
+  {
+    path: "/comments",
+    name: "ShowComment",
+    components: {
+      default: ShowComment,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Tất cả bình luận"}
+  },
+  {
+    path: "/search/:searchString",
+    name: "product.search",
+    components: {
+      default: searchProduct,
+      "user-header":HeaderUser,
+      "user-footer":FooterUser,
+    },
+    meta: { title: "Chi tiết sản phẩm" },
+   props:true
+  },
     
 ];
 const router = createRouter({
