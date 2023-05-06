@@ -28,7 +28,7 @@ export default {
 <template>
   <div class="store-detail container">
     <div class="row">
-      <div class="col-5 pb-2 boxSh" v-for="(store, index) in stores" :key="index">
+      <div class="col-5 pb-2 mb-4 boxSh" v-for="(store, index) in stores" :key="index">
         <div class="store-img mt-2">
           <img :src=store.image alt="">
         </div>

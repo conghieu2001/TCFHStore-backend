@@ -25,11 +25,11 @@
             v-model:activeIndex="activeIndex"
           />
           <p v-else>Chưa có chi nhánh nào!</p>
-          <div class="mt-3 position-relative remove-all">
+          <!-- <div class="mt-3 position-relative remove-all">
             <button class="btn btn-sm btn-danger" @click="removeAllRecs">
               <i class="fas fa-trash"></i> Xóa tất cả
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -188,7 +188,7 @@
               <div class="col-2 image-itemIncart">
                 <img :src="item.image" alt="" />
               </div>
-              <div class="col-7">
+              <div class="col-7 pr-0">
                 <h6>{{ item.quantity }} x {{ item.name }}</h6>
                 <div class="d-flex align-items-center">
                   Size: {{ item.size }} x
