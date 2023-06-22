@@ -33,6 +33,7 @@
             <li><router-link to="/chuyennha">Chuyện Nhà</router-link></li>
             <li><router-link to="/store">Cửa Hàng</router-link></li>
             <li><router-link to="/tuyendung">Tuyển Dụng</router-link></li>
+            <li><router-link to="/voucher">Khuyến Mãi</router-link></li>
           </ul>
         </div>
         <div class="header__icon pt-3 col-3 d-flex align-items-baseline">

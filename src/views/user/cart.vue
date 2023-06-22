@@ -37,7 +37,6 @@
                 <hr />
                 <div class="delivery-time mb-2">
                   <h6>Nhận hàng trong khoảng 15-30 phút</h6>
-                  
                 </div>
               </div>
             </div>
@@ -154,7 +153,10 @@
                 <p>MoMo</p>
               </li>
               <li class="pay-methods">
-                <input name="type" type="radio" @blur="isValidateForm()"
+                <input
+                  name="type"
+                  type="radio"
+                  @blur="isValidateForm()"
                   v-bind:class="{
                     'is-invalid': errors.methodPay,
                     'is-valid': errors.valid_methodPay,
@@ -162,7 +164,8 @@
                   v-model="this.methodPay"
                   @click="this.byMoney()"
                   value="Thẻ Ngân Hàng"
-                  required/>
+                  required
+                />
                 <img
                   src="https://minio.thecoffeehouse.com/image/tchmobileapp/385_ic_atm@3x.png"
                   alt=""
@@ -215,16 +218,32 @@
                 <p>{{ item.price * item.quantity }}đ</p>
               </div>
             </div>
-            <p class="list-title mb-5 pb-2">Tổng cộng</p>
+            <p class="list-title mb-3 pb-2">Tổng cộng</p>
             <div class="total">
+              <form @submit.prevent="addCode(name)" class="d-flex">
+                <p>Khuyến mãi</p>
+                <div class="d-flex align-items-baseline add-voucher">
+                  <i class="fas fa-qrcode" style="color: #dd8d1d"></i>
+                  <input
+                    v-model="name"
+                    type="text"
+                    placeholder="Nhập mã khuyến mãi"
+                  />
+                  <button type="submit">Áp dụng</button>
+                </div>
+              </form>
               <div class="thanh-tien d-flex justify-content-between">
                 <p>Thành tiền</p>
-                <p>{{ this.TT }}đ</p>
+                <p>{{ this.TTSP }}đ</p>
               </div>
               <hr />
               <div class="phi-giao-hang d-flex justify-content-between">
                 <p>Phí giao hàng</p>
                 <p>{{ this.PGH }}đ</p>
+              </div>
+              <div class="khuyen-mai d-flex justify-content-between">
+                <p>Khuyến mãi</p>
+                <p>{{ this.TT - this.TTSP }}đ</p>
               </div>
             </div>
             <div class="card-right-foot">
@@ -244,15 +263,19 @@
 </template>
 <script>
 import PayService from "@/services/pay.service";
+import promoService from "../../services/promo.service";
 export default {
   data() {
     return {
+      // name: "",
       itemsCart: [],
       isExisItem: false,
       PGH: 0, //Phí giao hàng
       TT: 0, //thành tiền
       GTSP: 0, //Giá theo sản phẩm
+      KhuyenMai: 0, //Khuyến mãi
       TongTien: 0,
+      TTSP: 0,
       nameKH: "",
       email: "",
       sdt: "",
@@ -260,6 +283,7 @@ export default {
       methodPay: "",
       ghichu: "",
       activepmt: true,
+      abcdef: '',
       errors: {
         nameKH: "",
         email: "",
@@ -284,12 +308,12 @@ export default {
           this.isExisItem = true;
           this.itemsCart.forEach((item) => {
             this.TT = this.TT + parseInt(item.price) * item.quantity;
+            this.TTSP = this.TT;
           });
-          if (this.TT >= 150000) {
-            
+          if (this.TT >= 200000) {
             this.TongTien = this.TT + this.PGH;
           } else {
-            this.PGH = 15000;
+            this.PGH = 20000;
             this.TongTien = this.TT + this.PGH;
           }
           // this.reloadAmountItem()
@@ -405,13 +429,6 @@ export default {
       } else {
         this.errors.valid_methodPay = true;
       }
-      // ghi chú
-      // if (!this.ghichu) {
-      //   this.errors.ghichu = "Quý khách vui lòng nhập ghi chú!";
-      //   isValid = false;
-      // } else {
-      //   this.errors.valid_ghichu = true;
-      // }
       return isValid;
     },
     async submitform() {
@@ -426,14 +443,16 @@ export default {
         ghichu: this.ghichu,
         itemsCart: this.itemsCart,
         TongTien: this.TongTien,
+        KhuyenMai: this.KhuyenMai,
       };
       // console.log(this.isValidateForm())
       if (this.isValidateForm() && this.itemsCart.length > 0) {
         // console.log(inforCustomer);
         try {
           const result = await PayService.createOrder(inforCustomer);
+          const code = await promoService.addCodeUpdate(this.abcdef._id);
           alert("Cảm ơn bạn đã đặt hàng!");
-          if(localStorage.getItem("cartItems")) {
+          if (localStorage.getItem("cartItems")) {
             localStorage.removeItem("cartItems");
           }
           location.reload();
@@ -443,6 +462,45 @@ export default {
       } else {
         alert("Quý khách nhập đầy đủ thông tin hoặc phải có hàng trong giỏ");
       }
+    },
+    async addCode(name) {
+      if (this.name == undefined) {
+        alert("Bạn chưa nhập mã!");
+      } else {
+        // console.log(name);
+        // console.log(this.abcdef)
+        const result = await promoService.addCode(name);
+        // console.log(result._id);
+        this.abcdef = result;
+        if (result.loaiPromo == "Ma giam gia") {
+          if (result.payValue <= this.TT) {
+            this.TT = this.TT - result.free;
+            this.KhuyenMai = result.free;
+            this.TongTien = this.TT + this.PGH;
+          } else {
+            alert("Đơn hàng không đủ điều kiện để áp dụng mã!");
+          }
+        } else {
+          if (result.payValue <= this.TT) {
+            if (this.PGH == 0) {
+              this.KhuyenMai = 0;
+            } else {
+              if (this.PGH >= result.free) {
+              this.PGH = this.PGH - result.free;
+              this.KhuyenMai = result.free;
+              this.TongTien = this.TT + this.PGH;
+            } else {
+              this.PGH = 0;
+              this.TongTien = this.TT;
+              this.KhuyenMai = 20000;
+            }
+            }
+          } else {
+            alert("Đơn hàng không đủ điều kiện để áp dụng mã!");
+          }
+        }
+      }
+      // console.log(this.KhuyenMai);
     },
   },
   mounted() {
@@ -456,5 +514,36 @@ export default {
 .error-nameKH {
   margin-top: 0;
   padding-top: 0 !important;
+}
+.add-voucher {
+  background: #fafafa;
+  border: 1px solid #ededed;
+  height: 35px;
+  width: 380px;
+  margin-left: 10px;
+}
+.add-voucher input {
+  border: none;
+  padding-left: 20px;
+  margin-left: 10px;
+  width: 65%;
+  height: 100%;
+  background: #fafafa;
+}
+.add-voucher button {
+  border: none;
+  height: 100%;
+  width: 40%;
+}
+.add-voucher * {
+  padding-top: 2px;
+}
+.fa-qrcode {
+  font-size: 20px;
+  padding-left: 10px;
+  /* padding-right: 5px; */
+}
+.add-voucher input:focus {
+  outline: none;
 }
 </style>

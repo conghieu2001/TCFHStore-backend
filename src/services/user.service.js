@@ -4,6 +4,7 @@ class UserService {
     constructor(baseUrl = "http://localhost:3000/user") {
         this.api = createApiClient(baseUrl);
     }
+
     async create(data) {
         return (await this.api.post("/", data)).data;
     }
@@ -18,6 +19,15 @@ class UserService {
     }
     async getUserById(id) {
         return (await this.api.get(`/${id}`)).data;
+    }
+    async getAll() {
+        return (await this.api.get("/")).data;
+    }
+    async updatequyen(id) {
+        return (await this.api.put(`/updatequyen/${id}`)).data;
+    }
+    async backquyen(id) {
+        return (await this.api.put(`/backquyen/${id}`)).data;
     }
         
 }

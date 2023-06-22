@@ -57,32 +57,56 @@
             </li>
           </ul>
         </div>
-        <div class="col-8 right-contentt pt-4">
-          <div class="content-right-items">
-            <div class="homepage-titlee d-flex align-items-baseline mb-1">
-              <h5>Sản Phẩm</h5>
-              <InputSearch v-model="searchText" />
+        <div class="col-8 right-content pt-4">
+          <div>
+            <div class="homepage-title">
+              <h5>Doanh Thu</h5>
             </div>
             <hr />
-            <div>
-              <ProductCategory
-                @select:coffee="getAllItemByCoffee"
-                @select:all="getAllProduct"
-                @select:hitea="getAllItemByHitea"
-                @select:tea="getAllItemByTea"
-                @select:favorite="getAllItemFavorite"
-              ></ProductCategory>
-              <ItemList
-                class="mt-3"
-                v-if="filteredItemsCount > 0"
-                :items="filteredItems"
-                v-model:activeIndex="activeIndex"
-              />
-              <p v-else>Không có sản phẩm nào.</p>
+            <div class="row contentDoanhThu">
+              <div>
+                <p class="textF">Doanh thu theo ngày</p>
+                <div>
+                  <input class="input-day-month-year" type="date" src="" alt="" v-model="date" />
+                  <button class="custom-btn btn-2 ml-1"
+                    @click="calculateDoanhThuNgay({ day: date })"
+                    type="submit"
+                  >
+                    <i class="fas fa-check" style="color: #ffffff"></i>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <p class="textF">Doanh thu theo tháng</p>
+                <div>
+                  <input class="input-day-month-year" type="month" src="" alt="" v-model="date" />
+                  <button class="custom-btn btn-2 ml-1"
+                    @click="calculateDoanhThuThang({ month: date })"
+                    type="submit"
+                  >
+                    <i class="fas fa-check" style="color: #ffffff"></i>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <p class="textF">Doanh thu theo năm</p>
+                <div>
+                  <select @change="calculateDoanhThuNam" class="select-year">
+                    <option selected>Năm</option>
+                    <option value="2022">Năm 2022</option>
+                    <option value="2023">Năm 2023</option>
+                  </select>
+                  <!-- <button @click="calculateDoanhThuNam({year: this.value})" type="submit"><i class="fas fa-check" style="color: #ffffff;"></i></button> -->
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center kqSearch">
+              <p class="textF ketqua">Kết quả:</p>
+              <div class="tongdoanhthu">{{ doanhthuNTN }} VND</div>
             </div>
           </div>
           <hr />
-          <div class="footer text-center pb-4">
+          <div class="footer text-center">
             2022 - 2023 &copy; Simple theme by <a href="/">CongHieu</a>
           </div>
         </div>
@@ -90,51 +114,17 @@
     </div>
   </main>
 </template>
-
 <script>
-import InputSearch from "@/components/admin/InputSearch.vue";
-import ItemList from "@/components/admin/ItemList.vue";
-import ItemService from "@/services/item.service";
-import ProductCategory from "../../components/admin/ProductCategory.vue";
+import PayService from "../../services/pay.service";
 export default {
-  components: {
-    InputSearch,
-    ItemList,
-    ProductCategory
-  },
   data() {
     return {
       UserName: "",
-      items: [],
-      activeIndex: -1,
-      searchText: "",
+      arrayPayCount: [],
+      doanhthu: "",
+      date: Date,
+      doanhthuNTN: 0,
     };
-  },
-  watch: {
-    searchText() {
-      this.activeIndex = -1;
-    },
-  },
-  computed: {
-    itemStrings() {
-      return this.items.map((item) => {
-        const { name, description, image, price } = item;
-        return [name, description, image, price].join("");
-      });
-    },
-    filteredItems() {
-      if (!this.searchText) return this.items;
-      return this.items.filter((_item, index) =>
-        this.itemStrings[index].includes(this.searchText)
-      );
-    },
-    activeItem() {
-      if (this.activeIndex < 0) return null;
-      return this.filteredItems[this.activeIndex];
-    },
-    filteredItemsCount() {
-      return this.filteredItems.length;
-    },
   },
   methods: {
     getUserName() {
@@ -143,40 +133,50 @@ export default {
         this.UserName = user.name;
       }
     },
-    async retrieveItems() {
+    async payCount() {
+      this.arrayPayCount = await PayService.getAll();
+    },
+    async getDoanhThu() {
       try {
-        this.items = await ItemService.getAll();
+        this.doanhthu = await PayService.getDoanhThu();
       } catch (error) {
         console.log(error);
       }
     },
-    refreshList() {
-      this.retrieveItems();
-      this.activeIndex = -1;
+    async calculateDoanhThuNgay(data) {
+      try {
+        this.doanhthuNTN = await PayService.getDoanhThuDMY(data);
+        console.log(this.doanhthuNTN, "day");
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async getAllProduct() {
-      this.items = await ItemService.getAll();
+    async calculateDoanhThuThang(data) {
+      try {
+        this.doanhthuNTN = await PayService.getDoanhThuDMY(data);
+        console.log(this.doanhthuNTN, "month");
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async getAllItemByCoffee() {
-      this.items = await ItemService.getAllItemByCoffee();
+    async calculateDoanhThuNam(e) {
+      // console.log(e.target.options.selectedIndex)
+      // const Vyear = 0;
+      try {
+        this.doanhthuNTN = await PayService.getDoanhThuDMY({
+          year: e.target.options.selectedIndex,
+        });
+        console.log(this.doanhthuNTN, "year");
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async getAllItemByHitea() {
-      this.items = await ItemService.getAllItemByHitea();
-    },
-    async getAllItemByTea() {
-      this.items = await ItemService.getAllItemByTea();
-    },
-    async getAllItemFavorite() {
-      this.items = await ItemService.getFavorite();
-    }
   },
   mounted() {
-    this.refreshList();
+    this.payCount();
+    this.getDoanhThu();
     this.getUserName();
   },
-  created() {
-    this.getAllProduct();
-  }
 };
 </script>
 <style>
@@ -187,17 +187,13 @@ main {
 .containner {
   padding-left: 100px;
 }
-.left-content {
+.left-content,
+.right-content {
   background-color: #fff;
   height: 590px;
   box-shadow: 20px -20px 60px #d9d9d9, -20px 20px 60px #ffffff;
 }
-.content-right {
-  background-color: #fff;
-  min-height: 590px;
-  box-shadow: 20px -20px 60px #d9d9d9, -20px 20px 60px #ffffff;
-}
-.content-right {
+.right-content {
   margin-left: 10px;
 }
 li {
@@ -240,6 +236,12 @@ a {
   color: #000;
 }
 
+.contentDoanhThu > a {
+  width: 210px;
+  height: 70px;
+  border-radius: 3px;
+  box-shadow: 5px 5px 100px #e3e3e3, -5px -5px 100px #ffffff;
+}
 .showItem:hover,
 .showOrders:hover,
 .showSales:hover,
@@ -311,34 +313,35 @@ a {
   font-size: 16px;
   padding-left: 5px;
 }
+.ketqua {
+  font-size: 18px;
+  padding-right: 10px;
+}
+.tongdoanhthu {
+  font-size: 18px;
+  color: rgb(192, 28, 28);
+}
 .btn-2 {
-  background: rgb(251, 33, 117);
-  background: linear-gradient(
-    0deg,
-    rgba(251, 33, 117, 1) 0%,
-    rgba(234, 76, 137, 1) 100%
-  );
+  background: rgb(251,33,117);
+    background: linear-gradient(0deg, rgba(251,33,117,1) 0%, rgba(234,76,137,1) 100%);
   border: none;
+  
 }
 .btn-2:before {
   height: 0%;
   width: 2px;
 }
 .btn-2:hover {
-  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
-    -4px -4px 6px 0 rgba(236, 238, 241, 0.5),
+  box-shadow:  4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+              -4px -4px 6px 0 rgba(236, 238, 241, 0.5), 
     inset -4px -4px 6px 0 rgba(244, 218, 246, 0.2),
     inset 4px 4px 6px 0 rgba(233, 187, 233, 0.4);
 }
-.right-contentt {
-  max-height: auto;
-  background-color: #fff;
-  /* height: 590px; */
-  box-shadow: 20px -20px 60px #d9d9d9, -20px 20px 60px #ffffff;
-  margin-left: 10px;
+.input-day-month-year {
+  height: 26px;
 }
-.content-right-items {
-  min-height: 500px;
+.select-year {
+  width: 150px;
+  height: 26px;
 }
 </style>
-

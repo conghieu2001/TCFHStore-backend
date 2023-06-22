@@ -57,15 +57,19 @@
           </div>
         </div>
         <button class="button-submit" type="submit">Đăng nhập</button>
-        <router-link to="signup">
+        
+        <div @click="gotoGG" class="login-by-google"><div class="d-flex justify-content-center align-items-center">Đăng nhập bằng <img src="../../assets/img/icons/google.png" alt=""></div></div>
+          <router-link to="signup">
           <p>Đăng kí</p>
         </router-link>
+        
       </form>
     </div>
   </main>
 </template>
 <script>
 import UserService from "@/services/user.service";
+import UserService2 from "@/services/user.service2";
 export default {
   data() {
     return {
@@ -79,6 +83,7 @@ export default {
         valid_email: false,
         valid_password: false,
       },
+      userGG: '',
     };
   },
   methods: {
@@ -125,6 +130,10 @@ export default {
             alert("Bạn đăng nhập thành công với tư cách Admin!");
             // location.reload();
             this.$router.push({ name: "HomeAdmin" });
+          } else if (resultLogin.user.quyen === 2) {
+            localStorage.removeItem('users');
+            alert("Tài khoản của bạn đã bị khóa!");
+            location.reload();
           }
         } else {
           alert("Bạn đã nhập sai tài khoản hoặc mật khẩu!");
@@ -137,9 +146,35 @@ export default {
     reloadPage() {
       window.location.reload();
     },
+    async gotoGG() {
+       location.href ="http://localhost:3000/auth/google";
+    },
   },
+  mounted() {
+    // this.testGet();
+  }
 };
 </script>
 <style scoped>
 @import "@/assets/login";
+.login-by-google div{
+  background-color: #ffffff;
+    width: 80%;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    color: #000; 
+    margin-left: 45px;
+    margin-bottom: 15px;
+}
+a {
+  text-decoration: none;
+}
+.login-by-google>div:hover {
+  background-color: rgb(202, 241, 251);
+}
+.login-by-google img {
+  width: 40px;
+  height: 40px;
+}
 </style>

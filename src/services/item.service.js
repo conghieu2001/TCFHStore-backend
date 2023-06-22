@@ -43,6 +43,12 @@ class ItemService {
     async getItemByName(data) {
         return (await this.api.get(`/find/byname/${data}`)).data;
     }
+    async updateFavorite(id) {
+        return (await this.api.put(`/favorite/aaaaa/${id}`)).data;
+    }
+    async getFavorite() {
+        return (await this.api.get("/favorite")).data;
+    }
         
 }
 

@@ -1,45 +1,37 @@
 <template>
-  <div class="menu-head pt-4 pb-4">
-    <div class="menu-head-title">
-      <i class="fa-solid fa-trophy me-2"></i>
-      <p>sản phẩm từ nhà</p>
-    </div>
-    <div class="menu-type-group pt-4">
+  <div class="menu-head ">
+    <div class="menu-type-group">
       <div class="menu-type">
-        <div class="menu-type-img" @click="selectAllProduct()">
-          <img src="../../assets/img/icons/tat-ca.png" alt="" />
-        </div>
-        <p>Tất cả</p>
+        <button class="btn btn-info" @click="selectAllProduct()">
+          Tất cả
+        </button>
       </div>
       <div class="menu-type">
-        <div class="menu-type-img" @click="selectProductByCategory()">
-          <img src="../../assets/img/icons/ca-phe.png" alt="" />
+        <div class="btn btn-info" @click="selectProductByCoffee()">
+          Cà phê
         </div>
-        <p>Cà phê</p>
-      </div>
-      <!-- <div class="menu-type">
-        <div class="menu-type-img">
-          <img src="../../assets/img/icons/cloudfee.png" alt="" />
-        </div>
-        <p>CouldFee</p>
-      </div> -->
-      <div class="menu-type">
-        <div class="menu-type-img" @click="selectProductByCompany()">
-          <img src="../../assets/img/icons/hi-tea.png" alt="" />
-        </div>
-        <p>Hi-Tea</p>
       </div>
       <div class="menu-type">
-        <div class="menu-type-img"  @click="selectProductByType()">
-          <img src="../../assets/img/icons/tra-trai-cay-tra-sua.png" alt="" />
+        <div class="btn btn-info" @click="selectProductByHitea()">
+          Hi-Tea
         </div>
-        <p>Trà Trái Cây</p>
       </div>
       <div class="menu-type">
-        <div class="menu-type-img"  @click="selectAllFavoriteItem()">
-          <img src="../../assets/img/icons/heart.png" alt="" />
+        <div class="btn btn-info"  @click="selectProductByTea()">
+          Trà Trái Cây
         </div>
-        <p>Sp yêu thích</p>
+      </div>
+      <div class="menu-type">
+        <div class="btn btn-info"  @click="selectAllFavoriteItem()">
+          Yêu Thích
+        </div>
+      </div>
+      <div class="menu-type">
+        <router-link to="/add">
+            <button class="btn btn-info">
+              <i class="fas fa-plus"></i>
+            </button>
+          </router-link>
       </div>
     </div>
   </div>
@@ -85,13 +77,13 @@ export default {
         console.log(error);
       }
     },
-    selectProductByCategory() {
+    selectProductByCoffee() {
       this.$emit("select:coffee", );
     },
-    selectProductByCompany() {
+    selectProductByHitea() {
       this.$emit("select:hitea", );
     },
-    selectProductByType() {
+    selectProductByTea() {
       this.$emit("select:tea", );
     },
     selectAllProduct() {

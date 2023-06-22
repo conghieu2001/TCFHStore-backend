@@ -1,63 +1,112 @@
 <template>
-  <div class="container pt-4">
-    <div class="row">
-      <div class="col-md-6">
-        <InputSearch v-model="searchText" />
-      </div>
-      <div class="mt-3 col-md-12">
-        <div class="d-flex">
-          <router-link to="/admin">
-            <button class="btn btn-dark ">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-          </router-link>
-          <h4 class="ml-1">Danh sách Bài viết</h4>
-          <router-link to="/posts/add">
-            <button class="btn btn-sm btn-success addItem">
-              <i class="fas fa-plus"></i> Thêm bài viết
-            </button>
-          </router-link>
-          <!-- <router-link :to="{name: 'item.trash'}">
-            <button class="trash-stored btn btn-secondary">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-          </router-link> -->
-
+  <main>
+    <div class="pt-3 containner">
+      <div class="row">
+        <div class="col-3 left-content">
+          <div class="info-admin d-flex align-items-baseline">
+            <div class="pr-2">
+              <i class="far fa-grin-hearts"></i>
+            </div>
+            <div>
+              <h6>{{ this.UserName }}</h6>
+            </div>
+          </div>
+          <hr />
+          <ul>
+            <li>
+              <router-link to="/admin">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/items">
+                <i class="fas fa-list"></i>
+                <span>Danh Mục Sản Phẩm</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/orders">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Đơn Hàng</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/posts">
+                <i class="fas fa-folder-open"></i>
+                <span>Bài Viết</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/recruitments">
+                <i class="fas fa-user-plus"></i>
+                <span>Tuyển Dụng</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/stores">
+                <i class="fas fa-map"></i>
+                <span>Cửa Hàng</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/comments">
+                <i class="fa-solid fa-comment"></i>
+                <span>Bình Luận</span>
+              </router-link>
+            </li>
+          </ul>
         </div>
-        <PostList
-          class="mt-2"
-          v-if="filteredPostsCount > 0"
-          :posts="filteredPosts"
-          v-model:activeIndex="activeIndex"
-        />
-        <p v-else>Không có bài viết nào.</p>
-        <div class="mt-3 position-relative remove-all">
-          <!-- <button class="btn btn-sm btn-primary" @click="refreshList()">
-            <i class="fas fa-redo"></i> Làm mới
-          </button> -->
-          <!-- <button class="btn btn-sm btn-danger" @click="removeAllPosts">
-            <i class="fas fa-trash"></i> Xóa tất cả
-          </button> -->
+        <div class="col-8 right-contentt pt-4">
+          <div class="content-right-items">
+            <div class="homepage-titlee d-flex align-items-baseline mb-1">
+              <h5>Bài Viết </h5>
+              <InputSearch v-model="searchText" />
+            </div>
+            <hr />
+            <div>
+              <PostCategory
+                @select:coffeeholic="getAllItemBycoffeeholic"
+                @select:all="getAllPost"
+                @select:teaholic="getAllItemByteaholic"
+                @select:blog="getAllItemByblog"
+              ></PostCategory>
+              <PostList
+                class="mt-3"
+                v-if="filteredPostsCount > 0"
+                :posts="filteredPosts"
+                v-model:activeIndex="activeIndex"
+              />
+              <p v-else>Không có bài viết nào.</p>
+            </div>
+          </div>
+          <hr />
+          <div class="footer text-center pb-4">
+            2022 - 2023 &copy; Simple theme by <a href="/">CongHieu</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
 import InputSearch from "@/components/admin/InputSearch.vue";
 import PostList from "@/components/admin/ItemListPost.vue";
 import PostService from "@/services/post.service";
+import PostCategory from "../../components/admin/PostCategory.vue";
 export default {
   components: {
     InputSearch,
     PostList,
+    PostCategory
   },
   data() {
     return {
       posts: [],
       activeIndex: -1,
       searchText: "",
+      UserName: "",
     };
   },
   watch: {
@@ -87,26 +136,30 @@ export default {
     },
   },
   methods: {
-    async retrievePosts() {
-      try {
-        this.posts = await PostService.getAll();
-      } catch (error) {
-        console.log(error);
+    getUserName() {
+      const user = JSON.parse(localStorage.getItem("users"));
+      if (localStorage.getItem("users") != null) {
+        this.UserName = user.name;
       }
     },
-    async removeAllPosts() {
-      if (confirm("Bạn muốn xóa tất cả Bài viết?")) {
-        try {
-          await PostService.deleteAll();
-          this.refreshList();
-        } catch (error) {
-          console.log(error);
-        }
-      }
+    async getAllPost() {
+      this.posts = await PostService.getAll();
+    },
+    async getAllItemBycoffeeholic() {
+      this.posts = await PostService.getAllCoffee();
+    },
+    async getAllItemByteaholic() {
+      this.posts = await PostService.getAllTea();
+    },
+    async getAllItemByblog() {
+      this.posts = await PostService.getAllBlog();
     },
   },
+  mounted() {
+    this.getUserName();
+  },
   created () {
-    this.retrievePosts();
+    this.getAllPost();
   }
 };
 </script>

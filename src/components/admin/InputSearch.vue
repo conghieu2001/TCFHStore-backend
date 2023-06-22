@@ -31,3 +31,14 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+.input-group {
+  width: 400px;
+  height: 40px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+.input-group-append button {
+  height: 38px;
+}
+</style>

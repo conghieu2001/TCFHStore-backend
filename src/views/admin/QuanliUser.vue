@@ -57,31 +57,41 @@
             </li>
           </ul>
         </div>
-        <div class="col-8 right-contentt pt-4">
-          <div class="content-right-items">
-            <div class="homepage-titlee d-flex align-items-baseline mb-1">
-              <h5>Sản Phẩm</h5>
-              <InputSearch v-model="searchText" />
+        <div class="col-8 content-right pt-4">
+          <div class="content-right-users">
+            <div class="homepage-title">
+              <h5>Người Dùng</h5>
             </div>
             <hr />
-            <div>
-              <ProductCategory
-                @select:coffee="getAllItemByCoffee"
-                @select:all="getAllProduct"
-                @select:hitea="getAllItemByHitea"
-                @select:tea="getAllItemByTea"
-                @select:favorite="getAllItemFavorite"
-              ></ProductCategory>
-              <ItemList
-                class="mt-3"
-                v-if="filteredItemsCount > 0"
-                :items="filteredItems"
-                v-model:activeIndex="activeIndex"
-              />
-              <p v-else>Không có sản phẩm nào.</p>
+            <div class="users" v-for="user in users" :key="user._id">
+              <div class="ml-5 d-flex justify-content-between mr-5">
+                <div class="d-flex">
+                  <div class="user-image"><img :src="user.image" alt="" /></div>
+                  <div class="user-info ml-3">
+                    <h6>{{ user.name }}</h6>
+                    <p>Email: {{ user.email }}</p>
+                  </div>
+                </div>
+                <div
+                  class="hover-point"
+                  :class="{ hideQuyen: !checkQuyen(user.quyen) }"
+                  @click="lockQuyen(user._id)"
+                >
+                <i class="fa-solid fa-lock" style="color: #023997;"></i>
+                </div>
+                <div
+                  class="hover-point"
+                  :class="{ hideQuyen: checkQuyen(user.quyen) }"
+                  @click="unlockQuyen(user._id)"
+                >
+                <i class="fa-sharp fa-solid fa-key" style="color: #bf7103;"></i>
+                </div>
+              </div>
+              <hr />
             </div>
+            <AddUser class="add-user"></AddUser>
+            <hr>
           </div>
-          <hr />
           <div class="footer text-center pb-4">
             2022 - 2023 &copy; Simple theme by <a href="/">CongHieu</a>
           </div>
@@ -90,51 +100,19 @@
     </div>
   </main>
 </template>
-
 <script>
-import InputSearch from "@/components/admin/InputSearch.vue";
-import ItemList from "@/components/admin/ItemList.vue";
-import ItemService from "@/services/item.service";
-import ProductCategory from "../../components/admin/ProductCategory.vue";
+import UserService from "../../services/user.service";
+import AddUser from "@/components/admin/AddUser.vue";
 export default {
   components: {
-    InputSearch,
-    ItemList,
-    ProductCategory
+    AddUser,
   },
   data() {
     return {
       UserName: "",
-      items: [],
-      activeIndex: -1,
-      searchText: "",
+      users: "",
+      isQuyen: false,
     };
-  },
-  watch: {
-    searchText() {
-      this.activeIndex = -1;
-    },
-  },
-  computed: {
-    itemStrings() {
-      return this.items.map((item) => {
-        const { name, description, image, price } = item;
-        return [name, description, image, price].join("");
-      });
-    },
-    filteredItems() {
-      if (!this.searchText) return this.items;
-      return this.items.filter((_item, index) =>
-        this.itemStrings[index].includes(this.searchText)
-      );
-    },
-    activeItem() {
-      if (this.activeIndex < 0) return null;
-      return this.filteredItems[this.activeIndex];
-    },
-    filteredItemsCount() {
-      return this.filteredItems.length;
-    },
   },
   methods: {
     getUserName() {
@@ -143,40 +121,38 @@ export default {
         this.UserName = user.name;
       }
     },
-    async retrieveItems() {
+    async getUsers() {
+      this.users = await UserService.getAll();
+    },
+    async lockQuyen(idus) {
       try {
-        this.items = await ItemService.getAll();
+        const lockquyen = await UserService.updatequyen(idus);
+        alert("Tài khoản người dùng đã bị khóa!");
+        location.reload();
       } catch (error) {
         console.log(error);
       }
     },
-    refreshList() {
-      this.retrieveItems();
-      this.activeIndex = -1;
+    async unlockQuyen(idus) {
+      try {
+        const unlockquyen = await UserService.backquyen(idus);
+        alert("Tài khoản người dùng đã được mở!");
+        location.reload();
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async getAllProduct() {
-      this.items = await ItemService.getAll();
+    checkQuyen(quyen) {
+      if (quyen == 1) {
+        return (this.isQuyen = true);
+      }
     },
-    async getAllItemByCoffee() {
-      this.items = await ItemService.getAllItemByCoffee();
-    },
-    async getAllItemByHitea() {
-      this.items = await ItemService.getAllItemByHitea();
-    },
-    async getAllItemByTea() {
-      this.items = await ItemService.getAllItemByTea();
-    },
-    async getAllItemFavorite() {
-      this.items = await ItemService.getFavorite();
-    }
   },
   mounted() {
-    this.refreshList();
     this.getUserName();
+    this.getUsers();
+    this.checkQuyen();
   },
-  created() {
-    this.getAllProduct();
-  }
 };
 </script>
 <style>
@@ -240,6 +216,12 @@ a {
   color: #000;
 }
 
+.contentDoanhThu > a {
+  width: 210px;
+  height: 70px;
+  border-radius: 3px;
+  box-shadow: 5px 5px 100px #e3e3e3, -5px -5px 100px #ffffff;
+}
 .showItem:hover,
 .showOrders:hover,
 .showSales:hover,
@@ -311,6 +293,14 @@ a {
   font-size: 16px;
   padding-left: 5px;
 }
+.ketqua {
+  font-size: 18px;
+  padding-right: 10px;
+}
+.tongdoanhthu {
+  font-size: 18px;
+  color: rgb(192, 28, 28);
+}
 .btn-2 {
   background: rgb(251, 33, 117);
   background: linear-gradient(
@@ -330,15 +320,40 @@ a {
     inset -4px -4px 6px 0 rgba(244, 218, 246, 0.2),
     inset 4px 4px 6px 0 rgba(233, 187, 233, 0.4);
 }
-.right-contentt {
-  max-height: auto;
-  background-color: #fff;
-  /* height: 590px; */
-  box-shadow: 20px -20px 60px #d9d9d9, -20px 20px 60px #ffffff;
-  margin-left: 10px;
+.input-day-month-year {
+  height: 26px;
 }
-.content-right-items {
-  min-height: 500px;
+.select-year {
+  width: 150px;
+  height: 26px;
+}
+.user-image img {
+  width: 50px;
+  height: 50px;
+}
+hr {
+  margin-top: 0;
+}
+.user-info {
+  padding-top: 10px;
+}
+.user-info h6 {
+  margin-bottom: 0;
+}
+.hideQuyen {
+  display: none;
+}
+.content-right-users {
+  min-height: 470px;
+}
+.hover-point {
+  cursor: pointer;
+}
+.hover-point i {
+  font-size: 20px;
+  padding-top: 10px;
+}
+.add-user {
+  padding-left: 55px;
 }
 </style>
-

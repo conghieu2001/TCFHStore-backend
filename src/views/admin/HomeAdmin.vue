@@ -26,9 +26,9 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/orders">
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Đơn Hàng</span>
+              <router-link to="/promotion">
+                <i class="fas fa-ticket"></i>
+                <span>Khuyến Mãi</span>
               </router-link>
             </li>
             <li>
@@ -70,10 +70,10 @@
                   <P>{{ this.arrayItemCount.length }} sản phẩm</P>
                 </div>
               </router-link>
-              <router-link to="/posts" class="showPosts">
+              <router-link to="/user" class="showPosts">
                 <div>
-                  <span>BÀI VIẾT</span>
-                  <P>{{ this.arrayPostCount.length }} bài viết</P>
+                  <span>NGƯỜI DÙNG</span>
+                  <P>{{ this.arrayUserCount.length }} người dùng</P>
                 </div>
               </router-link>
               <router-link to="/orders" class="showOrders">
@@ -82,9 +82,11 @@
                   <P>{{ arrayPayCount.length }} đơn hàng</P>
                 </div>
               </router-link>
-              <router-link to="" class="showSales">
+              <router-link to="/doanhthu" class="showSales">
                 <div>
-                  <span>TỔNG DOANH THU</span>
+                  <span>TỔNG DOANH THU 
+                    
+                  </span>
                   <P>{{ doanhthu }}đ</P>
                 </div>
               </router-link>
@@ -103,13 +105,19 @@
 import ItemService from '../../services/item.service';
 import PostsService from '../../services/post.service';
 import PayService from '../../services/pay.service';
+import UserService from '../../services/user.service';
+// import DoanhThu from '../../components/admin/doanhthu';
 export default {
+  // components: {
+  //   DoanhThu
+  // },
   data() {
     return {
       UserName: '',
       arrayItemCount: [],
       arrayPostCount: [],
       arrayPayCount: [],
+      arrayUserCount: [],
       doanhthu: '',
     };
   },
@@ -135,6 +143,9 @@ export default {
       } catch(error) {
         console.log(error);
       }
+    },
+    async getUser() {
+      this.arrayUserCount = await UserService.getAll();
     }
   },
   mounted() {
@@ -143,6 +154,7 @@ export default {
     this.postCount();
     this.payCount();
     this.getDoanhThu();
+    this.getUser();
   }
 };
 </script>
@@ -181,7 +193,7 @@ li > a > span {
 }
 .fa-home,
 .fa-list,
-.fa-money-bill-wave,
+.fa-ticket,
 .fa-folder-open,
 .fa-user-plus,
 .fa-comment,

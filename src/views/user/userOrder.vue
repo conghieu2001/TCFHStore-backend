@@ -82,7 +82,7 @@ export default {
     },
     async getOrderByEmail() {
       this.Orders = await PayService.getAllOrder(this.InfoUser.email);
-
+      this.Orders.reverse();
       // console.log(this.Orders[0].trangthai);
     },
     // async deleteUserOrder() {

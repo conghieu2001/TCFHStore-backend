@@ -44,14 +44,27 @@
               <p>Tổng tiền</p>
               <p class="active-info">{{ order.TongTien }}₫</p>
             </div>
-            <div class="d-flex justify-content-between pr-5">
+            <div
+              class="d-flex justify-content-between pr-5 align-items-baseline"
+            >
               <p>Trạng thái</p>
               <p class="active-trangthai">{{ order.trangthai }}</p>
-              <span class="hover-point" :class="{'hideTrangThai': !checkIsTrangThai(order.trangthai)}" @click="updateOrder(order.id)"> 
+              <span
+                class="hover-point"
+                :class="{ hideTrangThai: !checkIsTrangThai(order.trangthai) }"
+                @click="updateOrder(order.id)"
+              >
                 <i class="fa-solid fa-check"></i
               ></span>
-              <span class="hover-point" :class="{'hideTrangThai': checkIsTrangThai(order.trangthai)}" @click="backOrder(order.id)"
-                ><i class="fas fa-undo"></i></span>
+              <span
+                class="hover-point"
+                :class="{ hideTrangThai: checkIsTrangThai(order.trangthai) }"
+                @click="backOrder(order.id)"
+                ><i class="fas fa-undo"></i
+              ></span>
+              <span class="hover-point-dollar" @click="confirmPay(order.id)"
+                ><img src="../../assets/img/icons/dollar.png"
+              /></span>
             </div>
           </div>
         </div>
@@ -84,14 +97,12 @@ export default {
     },
     async getOrderByEmail() {
       this.Orders = await PayService.getAll();
-
-      // console.log(this.Orders);
+      this.Orders.reverse()
     },
     async updateOrder(idhd) {
       try {
-        
         const resultUpdateOrder = await PayService.updateStatus(idhd);
-        alert('Đã chuyển đến trạng thái giao hàng!');
+        alert("Đã chuyển đến trạng thái giao hàng!");
         location.reload();
       } catch (error) {
         console.log(error);
@@ -99,19 +110,29 @@ export default {
     },
     async backOrder(idhd) {
       try {
-        
         const resultBackOrder = await PayService.backStatus(idhd);
-        alert('Đã cập nhật lại trạng thái!');
+        alert("Đã cập nhật lại trạng thái!");
         location.reload();
       } catch (error) {
         console.log(error);
       }
     },
-    checkIsTrangThai(trangthai) {
-      if(trangthai == 'Cho xac nhan') {
-        return this.isStatusOrder = true;
+    async confirmPay(idhd) {
+      try {
+        await PayService.confirmPay(idhd);
+        alert("Đơn hàng đã thanh toán!");
+        // console.log(document.querySelector(".hover-point"))
+        // document.querySelectorAll('.hover-point').remove("span");
+        // location.reload();
+      } catch (error) {
+        console.log(error);
       }
-    }
+    },
+    checkIsTrangThai(trangthai) {
+      if (trangthai == "Cho xac nhan") {
+        return (this.isStatusOrder = true);
+      }
+    },
   },
   mounted() {
     this.getEmailUser();
@@ -176,8 +197,15 @@ h3 {
 }
 .hover-point {
   cursor: pointer;
+  /* display: none; */
+  /* z-index: 0; */
 }
 .hideTrangThai {
   display: none;
+  /* z-index: 100; */
+}
+.hover-point-dollar img {
+  width: 27px;
+  margin-bottom: 5px;
 }
 </style>

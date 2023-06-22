@@ -31,7 +31,7 @@
           />
           <ErrorMessage name="name" class="error-feedback" />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <Field
             v-model="user.sdt"
             name="sdt"
@@ -41,7 +41,7 @@
             required
           />
           <ErrorMessage name="sdt" class="error-feedback" />
-        </div>
+        </div> -->
         <div class="form-group">
           <Field
             v-model="user.email"
@@ -53,7 +53,7 @@
           />
           <ErrorMessage name="email" class="error-feedback" />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <Field
             v-model="user.gioitinh"
             name="gioitinh"
@@ -62,8 +62,8 @@
             placeholder="Giới tính"
           />
           <ErrorMessage name="gioitinh" class="error-feedback" />
-        </div>
-        <div class="form-group">
+        </div> -->
+        <!-- <div class="form-group">
           <Field
             v-model="user.ngaysinh"
             name="ngaysinh"
@@ -73,7 +73,7 @@
             required
           />
           <ErrorMessage name="ngaysinh" class="error-feedback" />
-        </div>
+        </div> -->
         <div class="form-group">
           <Field
             v-model="user.password"
@@ -115,20 +115,20 @@ export default {
         .string()
         .email("E-mail không hợp lệ.")
         .max(50, "E-mail tối đa 50 ký tự."),
-      sdt: yup
-        .string()
-        .matches(
-          /((09|03|07|08|05)+([0-9]{8})\b)/g,
-          "Số điện thoại không hợp lệ."
-        ),
-      gioitinh: yup
-        .string()
-        .required("Giới tính Nam or Nữ")
-        .min(2, "aaa")
-        .max(5, "aaa"),
-      ngaysinh: yup
-        .string()
-        .required("mm/dd/yyyy chưa hợp lệ!"),
+      // sdt: yup
+      //   .string()
+      //   .matches(
+      //     /((09|03|07|08|05)+([0-9]{8})\b)/g,
+      //     "Số điện thoại không hợp lệ."
+      //   ),
+      // gioitinh: yup
+      //   .string()
+      //   .required("Giới tính Nam or Nữ")
+      //   .min(2, "aaa")
+      //   .max(5, "aaa"),
+      // ngaysinh: yup
+      //   .string()
+      //   .required("mm/dd/yyyy chưa hợp lệ!"),
       password: yup
         .string()
         .required("Mật khẩu phải có it nhất 8 kí tự.")
@@ -146,7 +146,7 @@ export default {
         const a = await UserService.create(this.user);
         alert("Chúc mừng bạn đã đăng kí tài khoản thành công!");
         this.$router.push({ name: "Login" });
-        console.log(a);
+        // console.log(a);
         // alert(a);
       } catch (error) {
         console.log(error);

@@ -12,6 +12,7 @@ import Signup from "@/views/user/signup.vue";
 import UserOder from "@/views/user/userOrder.vue";
 import DetailUser from "@/views/user/detail-user.vue";
 import searchProduct  from "@/views/user/ProductSearch.vue";
+import Promotion  from "@/views/user/promotion.vue";
 import HeaderUser from "../components/user-header.vue";
 import HeaderCart from "../components/cart-header.vue";
 import FooterUser from "../components/user-footer.vue";
@@ -19,6 +20,8 @@ import AppHeader from "../components/AppHeader.vue";
 import ShowAllItem from "@/views/admin/ShowAllItem.vue";
 import ItemEdit from "@/views/admin/ItemEdit.vue";
 import ItemAdd from "@/views/admin/ItemAdd.vue";
+import PromoAdd from "@/views/admin/PromoAdd.vue";
+import ItemFavorite from "@/views/admin/ItemFavorite.vue";
 import ShowAllPost from "@/views/admin/ShowAllPost.vue";
 import PostAdd from "@/views/admin/PostAdd.vue";
 import PostEdit from "@/views/admin/PostEditt.vue";
@@ -30,6 +33,9 @@ import StoreAdd from "@/views/admin/StoreAdd.vue";
 import ShowStore from "@/views/admin/ShowStore.vue";
 import ShowOrders from "@/views/admin/ShowAllOrder.vue";
 import ShowComment from "@/views/admin/ShowComment.vue";
+import DoanhThu from '@/views/admin/DoanhThu.vue';
+import ShowUser from '@/views/admin/QuanliUser.vue';
+import ShowPromo from '@/views/admin/Promotion.vue';
 const routes = [
   //Home
   {
@@ -150,7 +156,7 @@ const routes = [
     props: true,
     meta: {title: "Chỉnh sửa thông tin cá nhân"}
   },
-  //xem hoa document{
+  //xem hoa don
   {
   path: "/userOrder",
     name: "UserOder",
@@ -162,6 +168,18 @@ const routes = [
     props: true,
     meta: {title: "Lịch sử mua hàng"}
   },
+  //khuyen mai
+  {
+    path: "/voucher",
+      name: "Promotion",
+      components: {
+        default: Promotion,
+        "user-header":HeaderUser,
+        "user-footer":FooterUser,
+      },
+      props: true,
+      meta: {title: "Lịch sử mua hàng"}
+    },
   //admin
   {
     path: "/admin",
@@ -244,6 +262,16 @@ const routes = [
     props: true,
     meta: {title: "Thêm sản phẩm"}
   },
+  {
+    path: "/favorite",
+    name: "item.favorite",
+    components: {
+      default: ItemFavorite,
+      "user-header":AppHeader,
+    },
+    props: true,
+    meta: {title: "Sản phẩm yêu thích"}
+  },
   //thêm bài viết
   {
     path: "/posts/add",
@@ -275,6 +303,16 @@ const routes = [
     },
     props: true ,
     meta: {title: "Thêm cửa hàng"}
+  },
+  {
+    path: "/promo/add",
+    name: "promo.add",
+    components: {
+      default: PromoAdd,
+      "user-header":AppHeader,
+    },
+    props: true ,
+    meta: {title: "Thêm mã khuyến mãi"}
   },
   {
     path: "/trash",
@@ -345,6 +383,38 @@ const routes = [
     meta: { title: "Chi tiết sản phẩm" },
    props:true
   },
+  //show Doanh THu 
+  {
+    path: "/doanhthu",
+    name: "DoanhThu",
+    components: {
+      default: DoanhThu,
+      "user-header":AppHeader,
+    },
+    meta: {title: "Doanh Thu"},
+    props: true
+  },
+  //show User
+  {
+    path: "/user",
+    name: "ShowUser",
+    components: {
+      default: ShowUser,
+      "user-header":AppHeader,
+    },
+    meta: {title: "Người Dùng"},
+    props: true
+  },
+  {
+    path: "/promotion",
+    name: "ShowPromo",
+    components: {
+      default: ShowPromo,
+      "user-header":AppHeader,
+    },
+    meta: {title: "Khuyễn Mãi"},
+    props: true
+  }
     
 ];
 const router = createRouter({

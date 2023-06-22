@@ -19,13 +19,18 @@ class PayService {
     async updateStatus(id) {
         return (await this.api.put(`/update/${id}`)).data;
     }
+    async confirmPay(id) {
+        return (await this.api.put(`/confirmpay/${id}`)).data;
+    }
     async backStatus(id) {
         return (await this.api.put(`/backStatus/${id}`)).data;
     }
     async getDoanhThu() {
         return (await this.api.get("/doanhthu/thang")).data;
     }
-        
+    async getDoanhThuDMY(data) {
+        return (await this.api.post("/doanhthu/thang", data)).data;
+    }
 }
 
 export default new PayService();
