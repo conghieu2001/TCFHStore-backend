@@ -16,21 +16,6 @@ class CmtService {
     async deleteCmt(id) {
         return (await this.api.delete(`/${id}`)).data;
     }
-    // async getByIdpd(id) {
-    //     return (await this.api.get(`/findByIdpd/ + ${id}`)).data;
-    // }
-    // async login(data) {
-    //     return (await this.api.post("/login", data)).data;
-    // }
-    // async update(id, data) {
-    //     return (await this.api.put(`/${id}`, data)).data;
-    // }
-    // async getByEmail(data) {
-    //     return (await this.api.get(`/findbyemail/${id}`)).data;
-    // }
-    // async getUserById(id) {
-    //     return (await this.api.get(`/${id}`)).data;
-    // }
         
 }
 

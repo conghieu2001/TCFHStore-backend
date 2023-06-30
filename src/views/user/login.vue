@@ -58,7 +58,7 @@
         </div>
         <button class="button-submit" type="submit">Đăng nhập</button>
         
-        <div @click="gotoGG" class="login-by-google"><div class="d-flex justify-content-center align-items-center">Đăng nhập bằng <img src="../../assets/img/icons/google.png" alt=""></div></div>
+        <LoginGG></LoginGG>
           <router-link to="signup">
           <p>Đăng kí</p>
         </router-link>
@@ -69,14 +69,18 @@
 </template>
 <script>
 import UserService from "@/services/user.service";
-import UserService2 from "@/services/user.service2";
+import LoginGG from "../../components/user/loginWithGoogle.vue"
 export default {
+  components: {
+    LoginGG
+  },
   data() {
     return {
       user: {
         email: "",
         matkhau: "",
       },
+      // userGG: {},
       errors: {
         email: "",
         password: "",
@@ -115,6 +119,10 @@ export default {
       return isValid;
     },
     // ham submitlogin
+    async submitGG() {
+      const resultLogin = await UserService.login(this.user)
+      localStorage.setItem("users", JSON.stringify(resultLogin.user));
+    },
     async submitLogin() {
       this.isValidateFormLogin();
       if (this.isValidateFormLogin()) {
@@ -146,35 +154,22 @@ export default {
     reloadPage() {
       window.location.reload();
     },
-    async gotoGG() {
-       location.href ="http://localhost:3000/auth/google";
-    },
+    // async gotoGG() {
+    //    location.href ="http://localhost:3000/auth/google";
+    // },
+    // async loginbyGoogle() {
+    //   this.userGG= await UserService.loginbygoogle();
+    //   localStorage.setItem("users", JSON.stringify(userGG.user));
+    //   console.log(this.userGG)
+    //   console.log("123")
+    // }
   },
   mounted() {
     // this.testGet();
+    // this.loginbyGoogle();
   }
 };
 </script>
 <style scoped>
 @import "@/assets/login";
-.login-by-google div{
-  background-color: #ffffff;
-    width: 80%;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid gray;
-    color: #000; 
-    margin-left: 45px;
-    margin-bottom: 15px;
-}
-a {
-  text-decoration: none;
-}
-.login-by-google>div:hover {
-  background-color: rgb(202, 241, 251);
-}
-.login-by-google img {
-  width: 40px;
-  height: 40px;
-}
 </style>

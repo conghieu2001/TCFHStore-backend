@@ -157,6 +157,7 @@
 <script>
 import ItemService from "@/services/item.service";
 import PostService from "@/services/post.service";
+import UserService from "../../services/user.service";
 export default {
   data() {
     return {
@@ -165,9 +166,16 @@ export default {
       postsCoffee: [],
       postsTea: [],
       postsBlog: [],
+      userGG: {}
     };
   },
   methods: {
+    async loginbyGoogle() {
+      this.userGG= await UserService.loginbygoogle();
+    //   localStorage.setItem("users", JSON.stringify(this.userGG.user));
+      console.log(this.userGG)
+      console.log("123")
+    },
     async getItemBestSale() {
       try {
         this.itemBests = await ItemService.getItemBest();
@@ -205,6 +213,7 @@ export default {
   },
   mounted() {
     this.getPost();
+    this.loginbyGoogle();  
   }
 };
 </script>
