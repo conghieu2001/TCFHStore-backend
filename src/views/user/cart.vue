@@ -445,13 +445,14 @@ export default {
         TongTien: this.TongTien,
         KhuyenMai: this.KhuyenMai,
       };
-      // console.log(this.isValidateForm())
+      // console.log(this.itemsCart.length)
       if (this.isValidateForm() && this.itemsCart.length > 0) {
         // console.log(inforCustomer);
         try {
           const result = await PayService.createOrder(inforCustomer);
-          const code = await promoService.addCodeUpdate(this.abcdef._id);
+          // const code = await promoService.addCodeUpdate(this.abcdef._id);
           alert("Cảm ơn bạn đã đặt hàng!");
+          // location.reload()
           if (localStorage.getItem("cartItems")) {
             localStorage.removeItem("cartItems");
           }

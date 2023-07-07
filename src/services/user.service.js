@@ -29,9 +29,9 @@ class UserService {
     async backquyen(id) {
         return (await this.api.put(`/backquyen/${id}`)).data;
     }
-    async loginbygoogle() {
-        return (await this.api.get("/logingoogle")).data;
-    }
+    // async loginbygoogle() {
+    //     return (await this.api.get("/logingoogle")).data;
+    // }
         
 }
 

@@ -123,7 +123,7 @@ export default {
         alert("Đơn hàng đã thanh toán!");
         // console.log(document.querySelector(".hover-point"))
         // document.querySelectorAll('.hover-point').remove("span");
-        // location.reload();
+        location.reload();
       } catch (error) {
         console.log(error);
       }
