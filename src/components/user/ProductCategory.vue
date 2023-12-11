@@ -57,34 +57,28 @@ export default {
   },
   emits: ["select:coffee", "select:all", "select:hitea", "select:tea", "select:favorite"],
   methods: {
-    async getCoffees() {
-      try {
-        this.coffees = await itemService.getAllItemByCoffee();
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getHiteas() {
-      try {
-        this.hiteas = await itemService.getAllItemByHitea();
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getTeas() {
-      try {
-        this.teas = await itemService.getAllItemByTea();
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getFavorites() {
-      try {
-        this.favorites = await itemService.getFavorite();
-      } catch(error) {
-        console.log(error);
-      }
-    },
+    
+    // async getHiteas() {
+    //   try {
+    //     this.hiteas = await itemService.getAllItemByHitea();
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    // async getTeas() {
+    //   try {
+    //     this.teas = await itemService.getAllItemByTea();
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    // async getFavorites() {
+    //   try {
+    //     this.favorites = await itemService.getFavorite();
+    //   } catch(error) {
+    //     console.log(error);
+    //   }
+    // },
     selectProductByCategory() {
       this.$emit("select:coffee", );
     },
@@ -102,10 +96,10 @@ export default {
     }
   },
   created() {
-    this.getCoffees();
-    this.getHiteas();
-    this.getTeas();
-    this.getFavorites();
+    // this.getCoffees();
+    // this.getHiteas();
+    // this.getTeas();
+    // this.getFavorites();
   },
 };
 </script>

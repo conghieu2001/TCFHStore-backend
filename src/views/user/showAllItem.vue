@@ -39,12 +39,12 @@ export default {
     async getAllItemByHitea() {
       this.products = await itemService.getAllItemByHitea();
     },
-    async getAllItemByTea() {
-      this.products = await itemService.getAllItemByTea();
-    },
-    async getAllItemFavorite() {
-      this.products = await itemService.getFavorite();
-    }
+    // async getAllItemByTea() {
+    //   this.products = await itemService.getAllItemByTea();
+    // },
+    // async getAllItemFavorite() {
+    //   this.products = await itemService.getFavorite();
+    // }
   },
   created() {
     this.getAllProduct();
